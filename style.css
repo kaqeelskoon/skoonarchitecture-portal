@@ -4,23 +4,27 @@
    ================================ */
 
 :root {
-  --primary: #185FA5;
-  --primary-dark: #0C447C;
-  --accent: #378ADD;
+  /* SKOON Brand - Black & Gold Identity */
+  --primary: #D4A574;           /* Gold/Bronze */
+  --primary-dark: #B8860B;      /* Dark Gold */
+  --accent: #D4A574;            /* Gold Accent */
   --success: #639922;
   --danger: #E24B4A;
   --warning: #BA7517;
-  --bg-light: #F1EFE8;
-  --bg-lighter: #FAFBFC;
-  --bg-card: #FFFFFF;
-  --text-primary: #1A1A1A;
-  --text-secondary: #666666;
-  --text-muted: #999999;
-  --border: #E0DED5;
-  --border-light: #F0EDE5;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-  --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+  
+  /* Dark Mode Theme */
+  --bg-light: #0A0E27;          /* Very Dark Blue/Black */
+  --bg-lighter: #1a1f3a;        /* Dark Blue */
+  --bg-card: #1a1f3a;           /* Card Dark Background */
+  --text-primary: #FFFFFF;      /* White Text */
+  --text-secondary: #B0B0B0;    /* Light Gray */
+  --text-muted: #787878;        /* Muted Gray */
+  --border: #2a2f4a;            /* Dark Border */
+  --border-light: #3a3f5a;      /* Lighter Dark Border */
+  
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
   --radius: 8px;
   --radius-lg: 12px;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -42,6 +46,8 @@ body {
   color: var(--text-primary);
   line-height: 1.6;
   font-size: 16px;
+  background: linear-gradient(135deg, #0A0E27 0%, #1a1f3a 100%);
+  min-height: 100vh;
 }
 
 html[lang="ar"] {

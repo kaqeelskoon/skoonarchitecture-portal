@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKOON - Client Login</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .login-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0A0E27 0%, #1a1f3a 100%);
+      padding: 2rem;
+    }
+
+    .login-box {
+      width: 100%;
+      max-width: 420px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 3rem;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .login-header h1 {
+      font-size: 1.8rem;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .login-header p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .logo {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      font-size: 24px;
+      font-weight: 700;
+      color: #000;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--bg-light);
+      color: var(--text-primary);
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.1);
+    }
+
+    .form-group input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .btn-login {
+      width: 100%;
+      padding: 0.9rem;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: #000;
+      border: none;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-bottom: 1rem;
+    }
+
+    .btn-login:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(212, 165, 116, 0.3);
+    }
+
+    .btn-login:active {
+      transform: translateY(0);
+    }
+
+    .login-footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .login-footer p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .btn-switch {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      background: var(--bg-light);
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      border-radius: var(--radius);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      font-size: 0.9rem;
+    }
+
+    .btn-switch:hover {
+      background: var(--primary);
+      color: #000;
+    }
+
+    .error-message {
+      background: rgba(226, 75, 74, 0.1);
+      border: 1px solid var(--danger);
+      color: var(--danger);
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius);
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .language-toggle {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      background: var(--primary);
+      color: #000;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    html[lang="ar"] .language-toggle {
+      left: 2rem;
+      right: auto;
+    }
+
+    .language-toggle:hover {
+      background: var(--primary-dark);
+    }
+
+    .demo-credentials {
+      background: var(--bg-light);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius);
+      padding: 1rem;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .demo-credentials strong {
+      color: var(--primary);
+    }
+
+    .demo-credentials p {
+      margin: 0.25rem 0;
+    }
+  </style>
+</head>
+<body id="client-login">
+  <button class="language-toggle" onclick="toggleLanguage()" data-i18n="common_language">العربية</button>
+
+  <div class="login-container">
+    <div class="login-box">
+      <div class="login-header">
+        <div class="logo">SK</div>
+        <h1 data-i18n="login_client">Client Login</h1>
+        <p data-i18n="login_title">Sign In to SKOON Portal</p>
+      </div>
+
+      <div class="error-message" id="error-message"></div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label data-i18n="login_username">Username or Email</label>
+          <input 
+            type="text" 
+            id="username" 
+            name="username" 
+            placeholder="e.g., saeed-kharbash"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label data-i18n="login_password">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            placeholder="••••••••"
+            required
+          >
+        </div>
+
+        <button type="submit" class="btn-login" data-i18n="login_submit">Sign In</button>
+      </form>
+
+      <div class="demo-credentials">
+        <p><strong>Demo Client Accounts:</strong></p>
+        <p>👤 saeed-kharbash / 123</p>
+        <p>👤 mana-abdulaziz / 123</p>
+        <p>👤 eman-abdelqadir / 123</p>
+        <p>👤 rashed-al-janahi / 123</p>
+        <p>👤 essa-kharbash / 123</p>
+        <p>👤 majed-almheiri / 123</p>
+        <p>👤 hanif-ebrahimi / 123</p>
+        <p>👤 jaiedco / 123</p>
+        <p>👤 aurum-hotel / 123</p>
+      </div>
+
+      <div class="login-footer">
+        <p data-i18n="login_switch_employee">Employee? Login here</p>
+        <a href="employee-login.html" class="btn-switch" data-i18n="login_employee">Employee Login</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    if (langParam) currentLanguage = langParam;
+    setLanguage(currentLanguage);
+
+    document.getElementById('login-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const errorEl = document.getElementById('error-message');
+
+      errorEl.classList.remove('show');
+      errorEl.textContent = '';
+
+      if (!username || !password) {
+        errorEl.textContent = t('login_required');
+        errorEl.classList.add('show');
+        return;
+      }
+
+      const user = authService.loginClient(username, password);
+
+      if (!user) {
+        errorEl.textContent = t('login_error');
+        errorEl.classList.add('show');
+        return;
+      }
+
+      window.location.href = 'dashboard-client.html?lang=' + currentLanguage;
+    });
+  </script>
+</body>
+</html>

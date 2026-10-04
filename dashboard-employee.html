@@ -3,81 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SKOON - Dashboard</title>
+  <title>SKOON - Employee Dashboard</title>
   <link rel="stylesheet" href="style.css">
   <style>
     .dashboard-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
       padding: 2rem;
       max-width: 1400px;
       margin: 0 auto;
     }
 
-    .top-nav {
+    .header-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
       flex-wrap: wrap;
-    }
-
-    .nav-left h1 {
-      color: var(--text-primary);
-      margin: 0;
-      font-size: 1.8rem;
-    }
-
-    .nav-right {
-      display: flex;
       gap: 1rem;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .user-info {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 0.75rem 1.5rem;
       background: var(--bg-card);
       border: 1px solid var(--border);
+      padding: 1.5rem;
       border-radius: var(--radius-lg);
     }
 
-    .user-avatar {
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #000;
-      font-weight: 700;
+    .header-info h1 {
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
     }
 
-    .user-name {
-      color: var(--text-primary);
-      font-weight: 600;
+    .header-info p {
+      color: var(--text-secondary);
       font-size: 0.9rem;
     }
 
-    .btn-logout {
-      padding: 0.6rem 1.2rem;
-      background: var(--danger);
-      color: white;
-      border: none;
-      border-radius: var(--radius);
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
+    .header-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
     }
 
-    .btn-logout:hover {
-      background: #c73939;
-    }
-
-    .lang-toggle {
+    .btn-action {
       padding: 0.6rem 1.2rem;
       background: var(--primary);
       color: #000;
@@ -86,75 +52,22 @@
       font-weight: 600;
       cursor: pointer;
       transition: var(--transition);
-    }
-
-    .lang-toggle:hover {
-      background: var(--primary-dark);
-    }
-
-    .stats-section {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .stat-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      padding: 1.5rem;
-      border-radius: var(--radius-lg);
-      text-align: center;
-      transition: var(--transition);
-    }
-
-    .stat-card:hover {
-      border-color: var(--primary);
-      box-shadow: 0 8px 24px rgba(212, 165, 116, 0.1);
-    }
-
-    .stat-number {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 0.5rem;
-    }
-
-    .stat-label {
-      color: var(--text-secondary);
       font-size: 0.9rem;
-      font-weight: 600;
     }
 
-    .controls-section {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      padding: 1.5rem;
-      border-radius: var(--radius-lg);
-      margin-bottom: 2rem;
+    .btn-action:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .filters-bar {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .search-box {
-      flex: 1;
-      min-width: 250px;
-      padding: 0.75rem 1rem;
-      background: var(--bg-light);
+      background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
-      color: var(--text-primary);
-    }
-
-    .search-box::placeholder {
-      color: var(--text-muted);
-    }
-
-    .search-box:focus {
-      outline: none;
-      border-color: var(--primary);
+      padding: 1rem;
+      border-radius: var(--radius-lg);
     }
 
     .filter-group {
@@ -165,17 +78,17 @@
 
     .filter-group label {
       color: var(--text-secondary);
-      font-weight: 600;
+      font-weight: 500;
       font-size: 0.9rem;
     }
 
     .filter-group select {
-      padding: 0.6rem 0.9rem;
+      padding: 0.5rem 0.75rem;
       background: var(--bg-light);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       color: var(--text-primary);
-      cursor: pointer;
+      font-size: 0.9rem;
     }
 
     .filter-group select:focus {
@@ -185,7 +98,7 @@
 
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 1.5rem;
     }
 
@@ -195,20 +108,21 @@
       border-radius: var(--radius-lg);
       overflow: hidden;
       transition: var(--transition);
-      display: flex;
-      flex-direction: column;
     }
 
     .project-card:hover {
       border-color: var(--primary);
-      box-shadow: 0 12px 36px rgba(212, 165, 116, 0.15);
-      transform: translateY(-6px);
+      box-shadow: 0 8px 24px rgba(212, 165, 116, 0.15);
+      transform: translateY(-4px);
     }
 
     .project-image {
       width: 100%;
       height: 200px;
       background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-lighter) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       overflow: hidden;
       position: relative;
     }
@@ -230,7 +144,7 @@
       pointer-events: none;
     }
 
-    .project-code-badge {
+    .project-code {
       position: absolute;
       top: 1rem;
       left: 1rem;
@@ -242,49 +156,45 @@
       font-size: 0.85rem;
     }
 
-    html[lang="ar"] .project-code-badge {
+    html[lang="ar"] .project-code {
       left: auto;
       right: 1rem;
     }
 
-    .project-content {
+    .project-info {
       padding: 1.5rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
     }
 
     .project-name {
       color: var(--text-primary);
       font-size: 1.1rem;
       font-weight: 600;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
     }
 
     .project-meta {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
+      flex-direction: column;
       gap: 0.5rem;
       margin-bottom: 1rem;
     }
 
-    .meta-item {
-      font-size: 0.85rem;
+    .project-meta-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
       color: var(--text-secondary);
     }
 
-    .meta-item strong {
+    .project-meta-item strong {
       color: var(--text-primary);
-      display: block;
-      font-size: 0.9rem;
     }
 
     .project-description {
       color: var(--text-secondary);
       font-size: 0.85rem;
-      line-height: 1.5;
       margin-bottom: 1rem;
-      flex: 1;
+      line-height: 1.5;
     }
 
     .project-footer {
@@ -332,55 +242,150 @@
 
     .btn-view:hover {
       background: var(--primary-dark);
-      transform: translateY(-2px);
     }
 
-    .empty-state {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 3rem 2rem;
+    .stats-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
       background: var(--bg-card);
-      border: 1px dashed var(--border);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
       border-radius: var(--radius-lg);
-      color: var(--text-secondary);
+      text-align: center;
     }
 
-    .empty-state p {
-      margin: 0;
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 250px;
+      padding: 0.75rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text-primary);
+      font-size: 0.9rem;
+    }
+
+    .search-box::placeholder {
+      color: var(--text-muted);
+    }
+
+    .search-box:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+    }
+
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .user-details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .user-name {
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .user-role {
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+    }
+
+    .btn-logout {
+      padding: 0.6rem 1.2rem;
+      background: var(--danger);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-logout:hover {
+      background: #c73939;
+    }
+
+    .lang-toggle {
+      background: var(--primary);
+      color: #000;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .lang-toggle:hover {
+      background: var(--primary-dark);
     }
 
     @media (max-width: 768px) {
-      .dashboard-container {
-        padding: 1rem;
-      }
-
-      .top-nav {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .nav-left h1 {
-        font-size: 1.3rem;
-      }
-
-      .nav-right {
-        width: 100%;
-      }
-
-      .user-info {
-        flex: 1;
-      }
-
-      .stats-section {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
       .projects-grid {
         grid-template-columns: 1fr;
       }
 
-      .controls-section {
+      .dashboard-container {
+        padding: 1rem;
+      }
+
+      .header-bar {
         flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .top-bar {
+        flex-direction: column;
+        align-items: stretch;
       }
 
       .search-box {
@@ -389,30 +394,39 @@
     }
   </style>
 </head>
-<body id="dashboard-admin">
+<body id="dashboard-employee">
   <div class="dashboard-container">
     <!-- Top Navigation -->
-    <div class="top-nav">
-      <div class="nav-left">
-        <h1 data-i18n="dashboard_welcome">Dashboard</h1>
-      </div>
+    <div class="top-bar">
+      <input type="text" class="search-box" id="search-input" placeholder="Search projects..." data-i18n="common_search">
       
-      <div class="nav-right">
+      <div style="display: flex; gap: 1rem;">
         <button class="lang-toggle" onclick="toggleLanguage()" data-i18n="common_language">العربية</button>
         
         <div class="user-info">
           <div class="user-avatar" id="user-avatar">SK</div>
-          <div class="user-name" id="user-name">User Name</div>
+          <div class="user-details">
+            <div class="user-name" id="user-name">User Name</div>
+            <div class="user-role" id="user-role">Employee</div>
+          </div>
         </div>
 
         <button class="btn-logout" onclick="logout()" data-i18n="common_logout">Logout</button>
       </div>
     </div>
 
-    <!-- Statistics Section -->
+    <!-- Header Section -->
+    <div class="header-bar">
+      <div class="header-info">
+        <h1 data-i18n="dashboard_welcome">Welcome</h1>
+        <p id="greeting" data-i18n="dashboard_employees">Employee Portal - All Projects</p>
+      </div>
+    </div>
+
+    <!-- Stats Section -->
     <div class="stats-section">
       <div class="stat-card">
-        <div class="stat-number" id="total-count">9</div>
+        <div class="stat-number" id="total-projects">9</div>
         <div class="stat-label" data-i18n="dashboard_projects">Total Projects</div>
       </div>
       <div class="stat-card">
@@ -425,28 +439,24 @@
       </div>
       <div class="stat-card">
         <div class="stat-number" id="contract-count">1</div>
-        <div class="stat-label">Contract Phase</div>
+        <div class="stat-label" data-i18n="dashboard_contract">Contract Phase</div>
       </div>
     </div>
 
-    <!-- Controls Section -->
-    <div class="controls-section">
-      <input 
-        type="text" 
-        id="search-input" 
-        class="search-box" 
-        placeholder="Search by project code, owner, or name..."
-        data-i18n="common_search"
-      >
-      
+    <!-- Filters -->
+    <div class="filters-bar">
       <div class="filter-group">
-        <label data-i18n="common_filter">Filter:</label>
+        <label data-i18n="common_filter">Filter by:</label>
         <select id="status-filter">
           <option value="">All Projects</option>
           <option value="construction">Under Construction</option>
           <option value="tender">Tender Stage</option>
-          <option value="contract">Contract Phase</option>
+          <option value="contract">Contract Signing</option>
         </select>
+      </div>
+      <div class="filter-group">
+        <label data-i18n="common_search">Search:</label>
+        <input type="text" id="project-search" placeholder="Project code, owner..." style="padding: 0.5rem 0.75rem; background: var(--bg-light); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text-primary);">
       </div>
     </div>
 
@@ -462,17 +472,18 @@
     const urlParams = new URLSearchParams(window.location.search);
     const langParam = urlParams.get('lang');
     if (langParam) currentLanguage = langParam;
-
-    // Check authentication
+    
+    // Redirect if not logged in or not employee
     if (!authService.isLoggedIn()) {
       window.location.href = 'employee-login.html';
     }
-
+    
     if (!authService.isEmployee()) {
       window.location.href = 'client-login.html';
     }
 
     setLanguage(currentLanguage);
+    initPage();
 
     // Update user info
     const user = authService.getUser();
@@ -481,46 +492,34 @@
       document.getElementById('user-avatar').textContent = user.name.charAt(0).toUpperCase();
     }
 
-    // Render projects grid
+    // Load all projects
     function renderProjects(projectsToShow = projectsData) {
       const container = document.getElementById('projects-container');
-
-      if (projectsToShow.length === 0) {
-        container.innerHTML = '<div class="empty-state"><p data-i18n="project_no_files">No projects found</p></div>';
-        return;
-      }
-
+      
       const html = projectsToShow.map(project => `
         <div class="project-card">
           <div class="project-image">
-            <span class="project-code-badge">${project.code}</span>
-            <img src="project-images/${project.image}" alt="${project.name}"
-                 onerror="this.src='https://via.placeholder.com/340x200?text=${project.code}'">
+            <span class="project-code">${project.code}</span>
+            <img src="project-images/${project.image}" alt="${project.name}" 
+                 onerror="this.src='https://via.placeholder.com/320x200?text=${project.code}'">
           </div>
-          <div class="project-content">
+          <div class="project-info">
             <div class="project-name">${project.name}</div>
-            
             <div class="project-meta">
-              <div class="meta-item">
+              <div class="project-meta-item">
+                <span data-i18n="dashboard_owner">Owner:</span>
                 <strong>${project.owner}</strong>
-                <span data-i18n="dashboard_owner">Owner</span>
               </div>
-              <div class="meta-item">
+              <div class="project-meta-item">
+                <span data-i18n="common_area">Area:</span>
                 <strong>${project.area}</strong>
-                <span data-i18n="common_area">Area</span>
               </div>
-              <div class="meta-item">
+              <div class="project-meta-item">
+                <span data-i18n="common_location">Location:</span>
                 <strong>${project.location}</strong>
-                <span data-i18n="common_location">Location</span>
-              </div>
-              <div class="meta-item">
-                <strong>${project.type}</strong>
-                <span data-i18n="common_scope">Type</span>
               </div>
             </div>
-
             <div class="project-description">${project.description}</div>
-
             <div class="project-footer">
               <span class="status-badge status-${project.status}">${project.stage}</span>
               <button class="btn-view" onclick="viewProject(${project.id})" data-i18n="dashboard_view_details">View</button>
@@ -539,7 +538,7 @@
       const tender = projects.filter(p => p.status === 'tender').length;
       const contract = projects.filter(p => p.status === 'contract').length;
 
-      document.getElementById('total-count').textContent = projects.length;
+      document.getElementById('total-projects').textContent = projects.length;
       document.getElementById('construction-count').textContent = construction;
       document.getElementById('tender-count').textContent = tender;
       document.getElementById('contract-count').textContent = contract;
@@ -548,44 +547,18 @@
     // Filter by status
     document.getElementById('status-filter').addEventListener('change', (e) => {
       const status = e.target.value;
-      const searchQuery = document.getElementById('search-input').value.toLowerCase();
-      
-      let filtered = projectsData;
-      
-      if (status) {
-        filtered = filtered.filter(p => p.status === status);
-      }
-      
-      if (searchQuery) {
-        filtered = filtered.filter(p =>
-          p.code.toLowerCase().includes(searchQuery) ||
-          p.owner.toLowerCase().includes(searchQuery) ||
-          p.name.toLowerCase().includes(searchQuery)
-        );
-      }
-      
+      const filtered = status ? projectsData.filter(p => p.status === status) : projectsData;
       renderProjects(filtered);
     });
 
     // Search projects
-    document.getElementById('search-input').addEventListener('input', (e) => {
+    document.getElementById('project-search').addEventListener('input', (e) => {
       const query = e.target.value.toLowerCase();
-      const status = document.getElementById('status-filter').value;
-
-      let filtered = projectsData;
-
-      if (status) {
-        filtered = filtered.filter(p => p.status === status);
-      }
-
-      if (query) {
-        filtered = filtered.filter(p =>
-          p.code.toLowerCase().includes(query) ||
-          p.owner.toLowerCase().includes(query) ||
-          p.name.toLowerCase().includes(query)
-        );
-      }
-
+      const filtered = projectsData.filter(p => 
+        p.code.toLowerCase().includes(query) || 
+        p.owner.toLowerCase().includes(query) ||
+        p.name.toLowerCase().includes(query)
+      );
       renderProjects(filtered);
     });
 
