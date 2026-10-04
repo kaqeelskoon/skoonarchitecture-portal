@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Request Quotation - SKOON Portal</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body id="quotation-page">
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="logo">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="8" width="12" height="24" fill="#185FA5" rx="2" />
+            <rect x="18" y="2" width="12" height="30" fill="#378ADD" rx="2" />
+            <rect x="34" y="12" width="6" height="20" fill="#639922" rx="1" />
+          </svg>
+          SKOON
+        </a>
+
+        <ul>
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="index.html#services" class="nav-link">Services</a></li>
+        </ul>
+
+        <div class="nav-right">
+          <div class="lang-switcher">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="ar">AR</button>
+          </div>
+          <button class="btn btn-primary" onclick="navigateTo('login')">
+            <i class="fas fa-sign-in-alt"></i> Sign In
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main style="background: #f5f5f5; padding: 3rem 0; min-height: calc(100vh - 80px);">
+    <div class="container">
+      <div style="max-width: 700px; margin: 0 auto;">
+        <!-- Form Section -->
+        <div class="card" style="margin-bottom: 2rem;">
+          <div class="card-header">
+            <h1 class="card-title" data-i18n="quotation_title">Request Quotation</h1>
+          </div>
+
+          <form id="quotation-form" class="card-body">
+            <!-- Project Name -->
+            <div class="form-group">
+              <label for="quotation-name" data-i18n="quotation_project_name">Project Name</label>
+              <input type="text" id="quotation-name" name="projectName" placeholder="e.g., Villa Al-Amali" required />
+            </div>
+
+            <!-- Project Type (Scope) -->
+            <div class="form-group">
+              <label for="quotation-scope" data-i18n="quotation_scope">Project Type</label>
+              <select id="quotation-scope" name="scope" required>
+                <option value="">-- Select Project Type --</option>
+                <option value="residential-villa">Residential Villa</option>
+                <option value="residential-apartment">Residential Apartment</option>
+                <option value="commercial">Commercial Building</option>
+                <option value="mixed">Mixed Use Development</option>
+              </select>
+            </div>
+
+            <!-- Form Row: Area & Location -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="quotation-area" data-i18n="quotation_area">Total Area</label>
+                <div style="display: flex; gap: 1rem;">
+                  <input type="number" id="quotation-area" name="area" placeholder="500" min="1" required style="flex: 1;" />
+                  <select style="flex: 0.5; max-width: 120px;">
+                    <option value="sqm">m²</option>
+                    <option value="sqft">ft²</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="quotation-location" data-i18n="quotation_location">Location</label>
+                <input type="text" id="quotation-location" name="location" placeholder="Dubai, UAE" required />
+              </div>
+            </div>
+
+            <!-- Scope Description -->
+            <div class="form-group">
+              <label for="quotation-description">Project Description</label>
+              <textarea id="quotation-description" name="description" placeholder="Tell us more about your project..."></textarea>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="form-group">
+              <label for="quotation-email">Your Email</label>
+              <input type="email" id="quotation-email" name="email" placeholder="your@email.com" required />
+            </div>
+
+            <!-- Button Group -->
+            <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+              <button type="button" class="btn btn-secondary" onclick="navigateTo('index')" data-i18n="quotation_cancel">Cancel</button>
+              <button type="submit" class="btn btn-primary" data-i18n="quotation_calculate">
+                <i class="fas fa-calculator"></i> Calculate Estimate
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Result Section -->
+        <div id="quotation-result" style="margin-bottom: 2rem;"></div>
+
+        <!-- Information Section -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">How It Works</h3>
+          </div>
+          <div class="card-body">
+            <div style="margin-bottom: 1.5rem;">
+              <h4 style="color: #185FA5; margin-bottom: 0.5rem;">
+                <i class="fas fa-file-alt" style="margin-inline-end: 0.5rem;"></i> 1. Submit Your Information
+              </h4>
+              <p>Provide basic project details including scope, area, and location.</p>
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+              <h4 style="color: #185FA5; margin-bottom: 0.5rem;">
+                <i class="fas fa-calculator" style="margin-inline-end: 0.5rem;"></i> 2. Get Initial Estimate
+              </h4>
+              <p>Our system provides an immediate cost estimate based on industry standards.</p>
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+              <h4 style="color: #185FA5; margin-bottom: 0.5rem;">
+                <i class="fas fa-envelope" style="margin-inline-end: 0.5rem;"></i> 3. Detailed Proposal
+              </h4>
+              <p>Our team reviews your project and sends a comprehensive proposal.</p>
+            </div>
+
+            <div>
+              <h4 style="color: #185FA5; margin-bottom: 0.5rem;">
+                <i class="fas fa-handshake" style="margin-inline-end: 0.5rem;"></i> 4. Start Your Project
+              </h4>
+              <p>Once approved, we move forward with detailed design and planning.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Features -->
+        <section style="margin-top: 2rem;">
+          <div class="grid grid-3">
+            <div class="card text-center">
+              <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚡</div>
+              <h4>Fast Response</h4>
+              <p>Get estimates within 2 hours</p>
+            </div>
+
+            <div class="card text-center">
+              <div style="font-size: 2rem; margin-bottom: 0.5rem;">💰</div>
+              <h4>Accurate Pricing</h4>
+              <p>Based on current market rates</p>
+            </div>
+
+            <div class="card text-center">
+              <div style="font-size: 2rem; margin-bottom: 0.5rem;">📊</div>
+              <h4>Detailed Breakdown</h4>
+              <p>Complete cost analysis by category</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3>SKOON</h3>
+          <p>Architecture & Engineering Consultants</p>
+        </div>
+        <div class="footer-section">
+          <h3>Services</h3>
+          <ul>
+            <li><a href="#">Design</a></li>
+            <li><a href="#">Supervision</a></li>
+            <li><a href="#">Consulting</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <ul>
+            <li><a href="mailto:info@skoon.ae">info@skoon.ae</a></li>
+            <li><a href="tel:+97144xxx">+971 4 XXX XXXX</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 SKOON Architecture. <span data-i18n="footer_rights">All rights reserved</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SKOON Architecture - Project Management Portal</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body id="home-page">
+  <!-- Header & Navigation -->
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="logo">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="8" width="12" height="24" fill="#185FA5" rx="2" />
+            <rect x="18" y="2" width="12" height="30" fill="#378ADD" rx="2" />
+            <rect x="34" y="12" width="6" height="20" fill="#639922" rx="1" />
+          </svg>
+          SKOON
+        </a>
+
+        <ul>
+          <li><a href="#services" class="nav-link">Services</a></li>
+          <li><a href="#features" class="nav-link">Features</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+
+        <div class="nav-right">
+          <div class="lang-switcher">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="ar">AR</button>
+          </div>
+          <button class="btn btn-primary" onclick="navigateTo('login')">
+            <i class="fas fa-sign-in-alt"></i> Sign In
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <h1 data-i18n="hero_title">SKOON Architecture & Engineering</h1>
+        <p class="mt-2" style="font-size: 1.3rem;" data-i18n="hero_subtitle">Project Management & Tender Portal</p>
+        <p class="mt-3" style="max-width: 600px; margin-left: auto; margin-right: auto;" data-i18n="hero_desc">
+          Streamline your project workflow with our integrated architecture platform
+        </p>
+        <button class="btn btn-primary mt-4" style="background: white; color: #185FA5; font-weight: 700;" onclick="navigateTo('quotation')">
+          <i class="fas fa-arrow-right"></i> <span data-i18n="hero_cta">Get Started</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+      <div class="container">
+        <h2 style="text-align: center; margin-bottom: 3rem;">Why Choose SKOON?</h2>
+
+        <div class="grid grid-4">
+          <!-- Feature 1 -->
+          <div class="card">
+            <div class="feature-icon">
+              <i class="fas fa-folder-open"></i>
+            </div>
+            <h3 data-i18n="feature_1_title">Project Management</h3>
+            <p data-i18n="feature_1_desc">Track and manage all your projects in one centralized platform</p>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="card">
+            <div class="feature-icon">
+              <i class="fas fa-calculator"></i>
+            </div>
+            <h3 data-i18n="feature_2_title">Smart Quotations</h3>
+            <p data-i18n="feature_2_desc">Get instant cost estimates with our advanced calculation system</p>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="card">
+            <div class="feature-icon">
+              <i class="fas fa-file-alt"></i>
+            </div>
+            <h3 data-i18n="feature_3_title">Document Management</h3>
+            <p data-i18n="feature_3_desc">Organize all project files, contracts, and drawings securely</p>
+          </div>
+
+          <!-- Feature 4 -->
+          <div class="card">
+            <div class="feature-icon">
+              <i class="fas fa-bell"></i>
+            </div>
+            <h3 data-i18n="feature_4_title">Real-time Updates</h3>
+            <p data-i18n="feature_4_desc">Stay informed with instant notifications on project status</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section style="background: #f5f5f5; padding: 3rem 0; margin: 3rem 0;">
+      <div class="container">
+        <div class="grid grid-4">
+          <div class="stat-card">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">Active Clients</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">500+</div>
+            <div class="stat-label">Projects Completed</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">2 hrs</div>
+            <div class="stat-label">Average Response Time</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">99%</div>
+            <div class="stat-label">Client Satisfaction</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+      <div class="container">
+        <h2 style="text-align: center; margin-bottom: 3rem;">Our Services</h2>
+
+        <div class="grid grid-3">
+          <!-- Design -->
+          <div class="card">
+            <div class="feature-icon" style="width: 80px; height: 80px; background: rgba(24, 95, 165, 0.2); margin-bottom: 1.5rem;">
+              <i class="fas fa-pencil-ruler" style="font-size: 2rem;"></i>
+            </div>
+            <h3 data-i18n="services_design">Design</h3>
+            <p>Innovative architectural design solutions tailored to your vision and requirements.</p>
+            <ul style="list-style: none;">
+              <li>✓ Conceptual Design</li>
+              <li>✓ Technical Drawings</li>
+              <li>✓ 3D Visualization</li>
+              <li>✓ BIM Modeling</li>
+            </ul>
+          </div>
+
+          <!-- Supervision -->
+          <div class="card">
+            <div class="feature-icon" style="width: 80px; height: 80px; background: rgba(99, 153, 34, 0.2); margin-bottom: 1.5rem;">
+              <i class="fas fa-hard-hat" style="font-size: 2rem;"></i>
+            </div>
+            <h3 data-i18n="services_supervision">Supervision</h3>
+            <p>Expert on-site supervision and quality assurance throughout the construction phase.</p>
+            <ul style="list-style: none;">
+              <li>✓ Site Inspections</li>
+              <li>✓ Quality Control</li>
+              <li>✓ Progress Monitoring</li>
+              <li>✓ Compliance Check</li>
+            </ul>
+          </div>
+
+          <!-- Consulting -->
+          <div class="card">
+            <div class="feature-icon" style="width: 80px; height: 80px; background: rgba(186, 117, 23, 0.2); margin-bottom: 1.5rem;">
+              <i class="fas fa-lightbulb" style="font-size: 2rem;"></i>
+            </div>
+            <h3 data-i18n="services_consulting">Consulting</h3>
+            <p>Professional consulting services for planning, feasibility, and project development.</p>
+            <ul style="list-style: none;">
+              <li>✓ Feasibility Studies</li>
+              <li>✓ Master Planning</li>
+              <li>✓ Cost Estimation</li>
+              <li>✓ Sustainability Consulting</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section style="background: linear-gradient(135deg, #185FA5 0%, #0C447C 100%); color: white; padding: 3rem 0; text-align: center; margin: 3rem 0;">
+      <div class="container">
+        <h2 style="color: white; margin-bottom: 1rem;">Ready to Get Started?</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 2rem; color: rgba(255, 255, 255, 0.9);">
+          Request a quotation or sign in to access your projects
+        </p>
+        <div class="flex-center" style="gap: 1rem; flex-wrap: wrap;">
+          <button class="btn" style="background: white; color: #185FA5; font-weight: 700;" onclick="navigateTo('quotation')">
+            <i class="fas fa-file-invoice"></i> Request Quote
+          </button>
+          <button class="btn" style="background: transparent; border: 2px solid white; color: white;" onclick="navigateTo('login')">
+            <i class="fas fa-sign-in-alt"></i> Sign In
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <div class="container">
+        <h2 style="text-align: center; margin-bottom: 2rem;">Get In Touch</h2>
+
+        <div class="grid grid-3" style="margin-bottom: 3rem;">
+          <!-- Address -->
+          <div class="card text-center">
+            <div class="feature-icon" style="width: 60px; height: 60px; margin-left: auto; margin-right: auto; margin-bottom: 1rem;">
+              <i class="fas fa-map-marker-alt" style="font-size: 1.8rem;"></i>
+            </div>
+            <h3>Address</h3>
+            <p data-i18n="footer_address">Dubai, UAE</p>
+          </div>
+
+          <!-- Phone -->
+          <div class="card text-center">
+            <div class="feature-icon" style="width: 60px; height: 60px; margin-left: auto; margin-right: auto; margin-bottom: 1rem;">
+              <i class="fas fa-phone" style="font-size: 1.8rem;"></i>
+            </div>
+            <h3>Phone</h3>
+            <p data-i18n="footer_phone">+971 4 XXX XXXX</p>
+          </div>
+
+          <!-- Email -->
+          <div class="card text-center">
+            <div class="feature-icon" style="width: 60px; height: 60px; margin-left: auto; margin-right: auto; margin-bottom: 1rem;">
+              <i class="fas fa-envelope" style="font-size: 1.8rem;"></i>
+            </div>
+            <h3>Email</h3>
+            <p><a href="mailto:info@skoon.ae" data-i18n="footer_email">info@skoon.ae</a></p>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div style="max-width: 600px; margin: 0 auto;">
+          <div class="card">
+            <h3 style="margin-bottom: 1.5rem;">Send us a Message</h3>
+            <form id="contact-form">
+              <div class="form-group">
+                <label for="contact-name">Full Name</label>
+                <input type="text" id="contact-name" name="name" required />
+              </div>
+
+              <div class="form-group">
+                <label for="contact-email">Email</label>
+                <input type="email" id="contact-email" name="email" required />
+              </div>
+
+              <div class="form-group">
+                <label for="contact-subject">Subject</label>
+                <input type="text" id="contact-subject" name="subject" required />
+              </div>
+
+              <div class="form-group">
+                <label for="contact-message">Message</label>
+                <textarea id="contact-message" name="message" required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3>SKOON</h3>
+          <p>Architecture & Engineering Consultants</p>
+          <p style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.6);">Delivering excellence in architectural design and engineering solutions.</p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="login.html">Portal Login</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Services</h3>
+          <ul>
+            <li><a href="#">Architectural Design</a></li>
+            <li><a href="#">Engineering</a></li>
+            <li><a href="#">Supervision</a></li>
+            <li><a href="#">Consulting</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <ul>
+            <li><a href="mailto:info@skoon.ae">Email: info@skoon.ae</a></li>
+            <li><a href="tel:+97144xxx">Phone: +971 4 XXX XXXX</a></li>
+            <li>Dubai, UAE</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 SKOON Architecture & Engineering. <span data-i18n="footer_rights">All rights reserved</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+
+  <script>
+    // Handle contact form
+    document.getElementById('contact-form')?.addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('Thank you for your message! We will contact you soon.');
+      this.reset();
+    });
+  </script>
+</body>
+</html>

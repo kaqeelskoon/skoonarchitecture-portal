@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In - SKOON Portal</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    .login-wrapper {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .login-left {
+      flex: 1;
+      background: linear-gradient(135deg, #185FA5 0%, #0C447C 100%);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 3rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-left::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+    }
+
+    .login-left > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .login-left h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .login-left p {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.9);
+      text-align: center;
+      max-width: 400px;
+    }
+
+    .login-right {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      background: #f5f5f5;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 400px;
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .login-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .login-logo svg {
+      width: 40px;
+      height: 40px;
+    }
+
+    .login-logo span {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #185FA5;
+    }
+
+    .login-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #1a1a1a;
+    }
+
+    .login-subtitle {
+      color: #999;
+      font-size: 0.9rem;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .login-form .form-group {
+      margin-bottom: 0;
+    }
+
+    .login-form input {
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 0.95rem;
+    }
+
+    .login-form input:focus {
+      border-color: #185FA5;
+      box-shadow: 0 0 0 3px rgba(24, 95, 165, 0.1);
+    }
+
+    .login-remember {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    .login-remember input[type="checkbox"] {
+      width: auto;
+      margin-inline-end: 0.5rem;
+    }
+
+    .login-forgot {
+      color: #185FA5;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .login-forgot:hover {
+      text-decoration: underline;
+    }
+
+    .login-button {
+      background: linear-gradient(135deg, #185FA5 0%, #0C447C 100%);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .login-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(24, 95, 165, 0.3);
+    }
+
+    .login-footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #eee;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .login-footer a {
+      color: #185FA5;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .login-footer a:hover {
+      text-decoration: underline;
+    }
+
+    .login-divider {
+      position: relative;
+      margin: 1.5rem 0;
+      text-align: center;
+      color: #999;
+      font-size: 0.85rem;
+    }
+
+    .login-divider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: #eee;
+    }
+
+    .login-divider span {
+      position: relative;
+      background: white;
+      padding: 0 10px;
+    }
+
+    .demo-accounts {
+      background: rgba(99, 153, 34, 0.05);
+      border: 1px solid rgba(99, 153, 34, 0.2);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+    }
+
+    .demo-accounts strong {
+      color: #639922;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .demo-account {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(99, 153, 34, 0.1);
+    }
+
+    .demo-account:last-child {
+      border-bottom: none;
+    }
+
+    @media (max-width: 768px) {
+      .login-wrapper {
+        flex-direction: column;
+      }
+
+      .login-left {
+        padding: 2rem;
+        min-height: 250px;
+      }
+
+      .login-left h1 {
+        font-size: 1.8rem;
+      }
+
+      .login-right {
+        padding: 2rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body id="login-page">
+  <!-- Header -->
+  <header style="position: absolute; top: 0; left: 0; right: 0; background: white; z-index: 50;">
+    <div class="container">
+      <nav style="justify-content: space-between;">
+        <a href="index.html" class="logo">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="8" width="12" height="24" fill="#185FA5" rx="2" />
+            <rect x="18" y="2" width="12" height="30" fill="#378ADD" rx="2" />
+            <rect x="34" y="12" width="6" height="20" fill="#639922" rx="1" />
+          </svg>
+          SKOON
+        </a>
+
+        <div class="nav-right">
+          <div class="lang-switcher">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="ar">AR</button>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Login Wrapper -->
+  <div class="login-wrapper">
+    <!-- Left Section -->
+    <div class="login-left">
+      <h1 data-i18n="hero_title">SKOON</h1>
+      <p>
+        Access your projects, manage tenders, and collaborate with our team. Everything you need to succeed in one integrated platform.
+      </p>
+    </div>
+
+    <!-- Right Section -->
+    <div class="login-right">
+      <div class="login-card">
+        <div class="login-header">
+          <h2 class="login-title" data-i18n="login_title">Sign In</h2>
+          <p class="login-subtitle">To your SKOON Account</p>
+        </div>
+
+        <form id="login-form" class="login-form">
+          <div class="form-group">
+            <label for="login-email" data-i18n="login_email">Email Address</label>
+            <input type="email" id="login-email" name="email" placeholder="your@email.com" required />
+          </div>
+
+          <div class="form-group">
+            <label for="login-password" data-i18n="login_password">Password</label>
+            <input type="password" id="login-password" name="password" placeholder="••••••••" required />
+          </div>
+
+          <div class="login-remember">
+            <label style="display: flex; align-items: center; cursor: pointer;">
+              <input type="checkbox" name="remember" />
+              Remember me
+            </label>
+            <a href="#" class="login-forgot" data-i18n="login_forgot">Forgot Password?</a>
+          </div>
+
+          <button type="submit" class="login-button" data-i18n="login_submit">Sign In</button>
+        </form>
+
+        <!-- Demo Accounts -->
+        <div class="demo-accounts">
+          <strong>Demo Accounts:</strong>
+          <div class="demo-account">
+            <span><strong>Client:</strong></span>
+            <span>client@example.com</span>
+          </div>
+          <div class="demo-account">
+            <span><strong>Admin:</strong></span>
+            <span>admin@example.com</span>
+          </div>
+        </div>
+
+        <div class="login-divider">
+          <span>or</span>
+        </div>
+
+        <div class="login-footer">
+          <span data-i18n="login_no_account">Don't have an account?</span>
+          <a href="#" data-i18n="login_signup">Sign Up</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

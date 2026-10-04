@@ -1,666 +1,330 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SKOON - Project Details</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    .detail-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-
-    .breadcrumb {
-      margin-bottom: 2rem;
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-    }
-
-    .breadcrumb a {
-      color: var(--primary);
-      text-decoration: none;
-    }
-
-    .breadcrumb a:hover {
-      text-decoration: underline;
-    }
-
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .btn-back {
-      padding: 0.6rem 1.2rem;
-      background: var(--bg-card);
-      color: var(--primary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      text-decoration: none;
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .btn-back:hover {
-      background: var(--border);
-    }
-
-    .lang-toggle {
-      background: var(--primary);
-      color: #000;
-      border: none;
-      padding: 0.6rem 1.2rem;
-      border-radius: var(--radius);
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .lang-toggle:hover {
-      background: var(--primary-dark);
-    }
-
-    .btn-logout {
-      padding: 0.6rem 1.2rem;
-      background: var(--danger);
-      color: white;
-      border: none;
-      border-radius: var(--radius);
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .btn-logout:hover {
-      background: #c73939;
-    }
-
-    .project-hero {
-      width: 100%;
-      height: 450px;
-      background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-lighter) 100%);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      margin-bottom: 2rem;
-      position: relative;
-      border: 1px solid var(--border);
-    }
-
-    .project-hero img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .project-hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, rgba(212, 165, 116, 0.1) 0%, transparent 100%);
-      pointer-events: none;
-    }
-
-    .project-code-badge {
-      position: absolute;
-      top: 2rem;
-      left: 2rem;
-      background: var(--primary);
-      color: #000;
-      padding: 0.75rem 1.5rem;
-      border-radius: var(--radius);
-      font-weight: 700;
-      font-size: 1.1rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    html[lang="ar"] .project-code-badge {
-      left: auto;
-      right: 2rem;
-    }
-
-    .project-header {
-      margin-bottom: 2rem;
-    }
-
-    .project-header h1 {
-      color: var(--text-primary);
-      margin-bottom: 0.5rem;
-      font-size: 2.5rem;
-    }
-
-    .project-header .subtitle {
-      color: var(--text-secondary);
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
-    }
-
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .info-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      padding: 1.5rem;
-      border-radius: var(--radius-lg);
-      border-left: 4px solid var(--primary);
-    }
-
-    html[lang="ar"] .info-card {
-      border-left: none;
-      border-right: 4px solid var(--primary);
-    }
-
-    .info-label {
-      color: var(--text-secondary);
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-
-    .info-value {
-      color: var(--text-primary);
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-
-    .section {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .section h2 {
-      color: var(--text-primary);
-      margin-bottom: 1.5rem;
-      font-size: 1.5rem;
-      border-bottom: 2px solid var(--border);
-      padding-bottom: 1rem;
-    }
-
-    .description-text {
-      color: var(--text-secondary);
-      line-height: 1.8;
-      margin-bottom: 1rem;
-    }
-
-    .document-list {
-      list-style: none;
-    }
-
-    .document-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem;
-      background: var(--bg-light);
-      border-radius: var(--radius);
-      margin-bottom: 0.75rem;
-      transition: var(--transition);
-    }
-
-    .document-item:hover {
-      background: var(--border);
-    }
-
-    .document-icon {
-      font-size: 1.5rem;
-      margin-right: 1rem;
-    }
-
-    html[lang="ar"] .document-icon {
-      margin-right: 0;
-      margin-left: 1rem;
-    }
-
-    .document-info {
-      flex: 1;
-    }
-
-    .document-name {
-      color: var(--text-primary);
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
-
-    .document-status {
-      color: var(--text-muted);
-      font-size: 0.85rem;
-    }
-
-    .document-status.pending {
-      color: #ffa500;
-    }
-
-    .document-status.ready {
-      color: #7acc2d;
-    }
-
-    .document-status.available {
-      color: #7acc2d;
-    }
-
-    .btn-document {
-      padding: 0.5rem 1rem;
-      background: var(--primary);
-      color: #000;
-      border: none;
-      border-radius: var(--radius);
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
-      font-size: 0.85rem;
-    }
-
-    .btn-document:hover {
-      background: var(--primary-dark);
-    }
-
-    .btn-document.disabled {
-      background: var(--text-muted);
-      cursor: not-allowed;
-      opacity: 0.6;
-    }
-
-    .status-section {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1.5rem;
-      background: var(--bg-light);
-      border-radius: var(--radius);
-      margin-bottom: 1rem;
-    }
-
-    .status-badge-large {
-      padding: 0.75rem 1.5rem;
-      border-radius: 20px;
-      font-weight: 600;
-      font-size: 1rem;
-    }
-
-    .status-construction {
-      background: rgba(99, 153, 34, 0.2);
-      color: #7acc2d;
-    }
-
-    .status-tender {
-      background: rgba(186, 117, 23, 0.2);
-      color: #ffa500;
-    }
-
-    .status-contract {
-      background: rgba(212, 165, 116, 0.2);
-      color: var(--primary);
-    }
-
-    .tabs {
-      display: flex;
-      gap: 0;
-      margin-bottom: 2rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .tab {
-      padding: 1rem 1.5rem;
-      background: transparent;
-      border: none;
-      color: var(--text-secondary);
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
-      border-bottom: 3px solid transparent;
-    }
-
-    .tab.active {
-      color: var(--primary);
-      border-bottom-color: var(--primary);
-    }
-
-    .tab:hover {
-      color: var(--text-primary);
-    }
-
-    .tab-content {
-      display: none;
-    }
-
-    .tab-content.active {
-      display: block;
-    }
-
-    @media (max-width: 768px) {
-      .detail-container {
-        padding: 1rem;
-      }
-
-      .project-hero {
-        height: 250px;
-      }
-
-      .project-header h1 {
-        font-size: 1.5rem;
-      }
-
-      .info-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .top-bar {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .tabs {
-        flex-wrap: wrap;
-      }
-
-      .tab {
-        padding: 0.75rem 1rem;
-        font-size: 0.9rem;
-      }
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Details - SKOON Portal</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 </head>
-<body id="project-detail">
-  <div class="detail-container">
-    <!-- Top Navigation -->
-    <div class="top-bar">
-      <a href="#" class="btn-back" onclick="history.back(); return false;" data-i18n="common_back">← Back</a>
-      
-      <div style="display: flex; gap: 1rem;">
-        <button class="lang-toggle" onclick="toggleLanguage()" data-i18n="common_language">العربية</button>
-        <button class="btn-logout" onclick="logout()" data-i18n="common_logout">Logout</button>
-      </div>
-    </div>
+<body id="project-detail-page">
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="logo">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="8" width="12" height="24" fill="#185FA5" rx="2" />
+            <rect x="18" y="2" width="12" height="30" fill="#378ADD" rx="2" />
+            <rect x="34" y="12" width="6" height="20" fill="#639922" rx="1" />
+          </svg>
+          SKOON
+        </a>
 
-    <!-- Project Hero Image -->
-    <div class="project-hero">
-      <span class="project-code-badge" id="project-code-hero">SD-P###</span>
-      <img id="project-hero-img" src="" alt="Project Hero" 
-           onerror="this.src='https://via.placeholder.com/1200x450?text=Project+Image'">
-    </div>
+        <ul>
+          <li><a href="dashboard-client.html" class="nav-link" data-i18n="nav_projects">Projects</a></li>
+        </ul>
 
-    <!-- Project Header -->
-    <div class="project-header">
-      <h1 id="project-title">Project Name</h1>
-      <p class="subtitle" id="project-subtitle">Project Details & Documentation</p>
-    </div>
-
-    <!-- Info Cards Grid -->
-    <div class="info-grid">
-      <div class="info-card">
-        <div class="info-label" data-i18n="dashboard_owner">Owner</div>
-        <div class="info-value" id="info-owner">-</div>
-      </div>
-      <div class="info-card">
-        <div class="info-label" data-i18n="common_area">Area</div>
-        <div class="info-value" id="info-area">-</div>
-      </div>
-      <div class="info-card">
-        <div class="info-label" data-i18n="common_location">Location</div>
-        <div class="info-value" id="info-location">-</div>
-      </div>
-      <div class="info-card">
-        <div class="info-label" data-i18n="dashboard_project_stage">Stage</div>
-        <div class="info-value" id="info-stage">-</div>
-      </div>
-      <div class="info-card">
-        <div class="info-label" data-i18n="common_scope">Scope</div>
-        <div class="info-value" id="info-type">-</div>
-      </div>
-      <div class="info-card">
-        <div class="info-label" data-i18n="common_status">Status</div>
-        <div style="margin-top: 0.5rem;">
-          <span class="status-badge-large status-construction" id="info-status">-</span>
+        <div class="nav-right">
+          <div class="lang-switcher">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="ar">AR</button>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span id="user-name" style="color: #666; font-weight: 500;">Client</span>
+            <button class="btn btn-ghost btn-small" id="logout-btn" data-i18n="nav_logout">Logout</button>
+          </div>
         </div>
-      </div>
+      </nav>
     </div>
+  </header>
 
-    <!-- Status Section -->
-    <div class="status-section">
-      <span data-i18n="common_status" style="font-weight: 600;">Project Status:</span>
-      <span class="status-badge-large status-construction" id="status-main">Under Construction</span>
-    </div>
-
-    <!-- Tabs Section -->
-    <div class="section">
-      <div class="tabs">
-        <button class="tab active" onclick="switchTab(event, 'overview')" data-i18n="project_overview">Overview</button>
-        <button class="tab" onclick="switchTab(event, 'documents')" data-i18n="project_files">Documents</button>
-        <button class="tab" onclick="switchTab(event, 'timeline')" data-i18n="project_timeline">Timeline</button>
+  <main style="background: #f5f5f5; padding: 2rem 0; min-height: calc(100vh - 80px);">
+    <div class="container">
+      <!-- Breadcrumb -->
+      <div style="margin-bottom: 2rem; color: #666; font-size: 0.9rem;">
+        <a href="dashboard-client.html" style="color: #185FA5;">Projects</a> / <span>Villa Al-Amali</span>
       </div>
 
-      <!-- Overview Tab -->
-      <div id="overview" class="tab-content active">
-        <h3 style="color: var(--text-primary); margin-bottom: 1rem;" data-i18n="project_description">Description</h3>
-        <p class="description-text" id="overview-text">Project description goes here...</p>
+      <!-- Project Header -->
+      <div class="card" style="margin-bottom: 2rem;">
+        <div class="card-header" style="flex-direction: column; align-items: flex-start;">
+          <div style="width: 100%;">
+            <h1 style="margin: 0; margin-bottom: 0.5rem;">Villa Al-Amali</h1>
+            <p style="color: #999; margin: 0;">Project Code: SD-P256</p>
+          </div>
+          <div style="margin-top: 1rem;">
+            <span class="status status-review">
+              <span class="status-dot"></span>
+              Under Review
+            </span>
+          </div>
+        </div>
 
-        <h3 style="color: var(--text-primary); margin-bottom: 1rem; margin-top: 1.5rem;" data-i18n="project_scope">Scope of Work</h3>
-        <p class="description-text">This project includes comprehensive architectural design, structural engineering, MEP systems design, tender documentation, and supervision services.</p>
-      </div>
-
-      <!-- Documents Tab -->
-      <div id="documents" class="tab-content">
-        <h3 style="color: var(--text-primary); margin-bottom: 1.5rem;" data-i18n="project_documents">Project Documents</h3>
-        <div id="documents-container"></div>
-      </div>
-
-      <!-- Timeline Tab -->
-      <div id="timeline" class="tab-content">
-        <h3 style="color: var(--text-primary); margin-bottom: 1.5rem;" data-i18n="project_timeline">Project Timeline</h3>
-        
-        <div style="position: relative; padding: 1rem 0;">
-          <div style="display: flex; margin-bottom: 2rem;">
-            <div style="flex: 0 0 40px; text-align: center;">
-              <div style="width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; font-weight: 700;">1</div>
+        <div class="card-body">
+          <div class="grid grid-4" style="margin-bottom: 1.5rem;">
+            <div>
+              <p style="color: #666; font-size: 0.9rem; margin-bottom: 0.25rem;" data-i18n="project_area">Area</p>
+              <h4 style="margin: 0;">450 m²</h4>
             </div>
-            <div style="flex: 1; padding-left: 1.5rem;">
-              <h4 style="color: var(--text-primary); margin-bottom: 0.25rem;">Design Phase</h4>
-              <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">Initial architectural design and planning</p>
+            <div>
+              <p style="color: #666; font-size: 0.9rem; margin-bottom: 0.25rem;">Client</p>
+              <h4 style="margin: 0;">Ahmed Ali</h4>
+            </div>
+            <div>
+              <p style="color: #666; font-size: 0.9rem; margin-bottom: 0.25rem;" data-i18n="project_scope">Scope</p>
+              <h4 style="margin: 0;">Residential Villa</h4>
+            </div>
+            <div>
+              <p style="color: #666; font-size: 0.9rem; margin-bottom: 0.25rem;">Location</p>
+              <h4 style="margin: 0;">Dubai, UAE</h4>
             </div>
           </div>
 
-          <div style="display: flex; margin-bottom: 2rem;">
-            <div style="flex: 0 0 40px; text-align: center;">
-              <div style="width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; font-weight: 700;">2</div>
-            </div>
-            <div style="flex: 1; padding-left: 1.5rem;">
-              <h4 style="color: var(--text-primary); margin-bottom: 0.25rem;">Tender Documentation</h4>
-              <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">Prepare BOQ, specifications and tender documents</p>
-            </div>
-          </div>
-
-          <div style="display: flex; margin-bottom: 2rem;">
-            <div style="flex: 0 0 40px; text-align: center;">
-              <div style="width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; font-weight: 700;">3</div>
-            </div>
-            <div style="flex: 1; padding-left: 1.5rem;">
-              <h4 style="color: var(--text-primary); margin-bottom: 0.25rem;">Contractor Selection</h4>
-              <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">Evaluate bids and select contractor</p>
-            </div>
-          </div>
-
-          <div style="display: flex;">
-            <div style="flex: 0 0 40px; text-align: center;">
-              <div style="width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; font-weight: 700;">4</div>
-            </div>
-            <div style="flex: 1; padding-left: 1.5rem;">
-              <h4 style="color: var(--text-primary); margin-bottom: 0.25rem;">Construction & Supervision</h4>
-              <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">On-site supervision and project management</p>
-            </div>
+          <div style="padding-top: 1rem; border-top: 1px solid #e0e0e0;">
+            <p><strong>Last Updated:</strong> October 14, 2024</p>
+            <p><strong>Created:</strong> October 8, 2024</p>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Contact Section -->
-    <div class="section">
-      <h2 data-i18n="dashboard_contact">Contact Information</h2>
-      <p class="description-text">
-        For questions or support regarding this project, please contact the SKOON Architecture & Engineering team.
-      </p>
-      <p>
-        <strong>Email:</strong> <a href="mailto:info@skoon.ae" style="color: var(--primary);">info@skoon.ae</a><br>
-        <strong>Phone:</strong> +971 4 XXX XXXX<br>
-        <strong>Location:</strong> Dubai, UAE
-      </p>
+      <!-- Tabs Section -->
+      <div class="card">
+        <!-- Tab Navigation -->
+        <div style="display: flex; border-bottom: 2px solid #e0e0e0; margin-bottom: 0;">
+          <button class="tab-btn active" onclick="switchTab('overview')" style="padding: 1.5rem; border-bottom: 3px solid #185FA5; color: #185FA5; font-weight: 600;">
+            <i class="fas fa-eye" style="margin-inline-end: 0.5rem;"></i> Overview
+          </button>
+          <button class="tab-btn" onclick="switchTab('files')" style="padding: 1.5rem; border-bottom: 2px solid transparent; color: #999; font-weight: 600;">
+            <i class="fas fa-file" style="margin-inline-end: 0.5rem;"></i> Files
+          </button>
+          <button class="tab-btn" onclick="switchTab('timeline')" style="padding: 1.5rem; border-bottom: 2px solid transparent; color: #999; font-weight: 600;">
+            <i class="fas fa-history" style="margin-inline-end: 0.5rem;"></i> Timeline
+          </button>
+        </div>
+
+        <!-- Tab Content: Overview -->
+        <div id="tab-overview" class="tab-content card-body">
+          <h3 style="margin-top: 0; margin-bottom: 1rem;">Project Information</h3>
+
+          <div class="grid grid-2" style="gap: 2rem;">
+            <div>
+              <h4>Project Details</h4>
+              <ul style="list-style: none;">
+                <li style="margin-bottom: 0.5rem;">
+                  <strong>Project Type:</strong> Residential Villa
+                </li>
+                <li style="margin-bottom: 0.5rem;">
+                  <strong>Total Area:</strong> 450 m²
+                </li>
+                <li style="margin-bottom: 0.5rem;">
+                  <strong>Location:</strong> Dubai, UAE
+                </li>
+                <li style="margin-bottom: 0.5rem;">
+                  <strong>Scope:</strong> Full Design & Supervision
+                </li>
+                <li style="margin-bottom: 0.5rem;">
+                  <strong>Estimated Cost:</strong> AED 450,000 - 520,000
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4>Timeline</h4>
+              <ul style="list-style: none;">
+                <li style="margin-bottom: 0.5rem;">
+                  <strong>Design Phase:</strong> 4-6 weeks
+                </li>
+                <li style="margin-bottom: 0.5rem;">
+                  <strong>Tender Preparation:</strong> 2-3 weeks
+                </li>
+                <li style="margin-bottom: 0.5rem;">
+                  <strong>Construction:</strong> 6-8 months
+                </li>
+                <li style="margin-bottom: 0.5rem;">
+                  <strong>Supervision:</strong> Throughout construction
+                </li>
+                <li style="margin-bottom: 0.5rem;">
+                  <strong>Expected Completion:</strong> Q4 2025
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="margin-top: 2rem; padding: 1.5rem; background: #f5f5f5; border-radius: 8px;">
+            <h4 style="margin-top: 0;">Project Description</h4>
+            <p>
+              This residential villa project involves the complete architectural design and engineering supervision for a modern family home. The design emphasizes contemporary aesthetics with emphasis on sustainable features and optimal space utilization. The project scope includes full design documentation, tender preparation, and site supervision.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tab Content: Files -->
+        <div id="tab-files" class="tab-content card-body" style="display: none;">
+          <h3 style="margin-top: 0; margin-bottom: 1.5rem;">Project Files</h3>
+
+          <!-- File Categories -->
+          <div style="margin-bottom: 2rem;">
+            <h4 data-i18n="project_drawings">Drawings</h4>
+            <div style="background: #f9f9f9; border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid #e0e0e0;">
+                <div>
+                  <i class="fas fa-file-pdf" style="color: #e24b4a; margin-inline-end: 0.5rem;"></i>
+                  <strong>Floor Plan - Rev 02.pdf</strong>
+                  <p style="margin: 0; color: #999; font-size: 0.85rem;">2.4 MB • Oct 14, 2024</p>
+                </div>
+                <div style="display: flex; gap: 0.5rem;">
+                  <button class="btn btn-secondary btn-small" data-i18n="project_download">Download</button>
+                  <button class="btn btn-secondary btn-small" data-i18n="project_view">View</button>
+                </div>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0;">
+                <div>
+                  <i class="fas fa-file-pdf" style="color: #e24b4a; margin-inline-end: 0.5rem;"></i>
+                  <strong>Elevation - Rev 01.pdf</strong>
+                  <p style="margin: 0; color: #999; font-size: 0.85rem;">3.1 MB • Oct 12, 2024</p>
+                </div>
+                <div style="display: flex; gap: 0.5rem;">
+                  <button class="btn btn-secondary btn-small" data-i18n="project_download">Download</button>
+                  <button class="btn btn-secondary btn-small" data-i18n="project_view">View</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 2rem;">
+            <h4 data-i18n="project_boq">Bill of Quantities</h4>
+            <div style="background: #f9f9f9; border-radius: 8px; padding: 1rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <i class="fas fa-file-excel" style="color: #639922; margin-inline-end: 0.5rem;"></i>
+                  <strong>BOQ_Final_Rev03.xlsx</strong>
+                  <p style="margin: 0; color: #999; font-size: 0.85rem;">1.2 MB • Oct 10, 2024</p>
+                </div>
+                <div style="display: flex; gap: 0.5rem;">
+                  <button class="btn btn-secondary btn-small" data-i18n="project_download">Download</button>
+                  <button class="btn btn-secondary btn-small" data-i18n="project_view">View</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Upload Section -->
+          <div style="background: #f5f5f5; border: 2px dashed #ddd; border-radius: 8px; padding: 2rem; text-align: center;">
+            <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; color: #999; margin-bottom: 1rem; display: block;"></i>
+            <h4 style="margin: 0 0 0.5rem 0;">Upload New File</h4>
+            <p style="color: #999; margin: 0 0 1rem 0;">Drag and drop or click to select files</p>
+            <button class="btn btn-primary" data-i18n="project_upload">Select File</button>
+          </div>
+        </div>
+
+        <!-- Tab Content: Timeline -->
+        <div id="tab-timeline" class="tab-content card-body" style="display: none;">
+          <h3 style="margin-top: 0; margin-bottom: 1.5rem;">Activity Timeline</h3>
+
+          <div style="border-left: 3px solid #185FA5; padding-left: 2rem;">
+            <!-- Timeline Item -->
+            <div style="margin-bottom: 2rem; position: relative;">
+              <div style="position: absolute; left: -2.75rem; top: 0; width: 12px; height: 12px; background: #185FA5; border-radius: 50%; border: 3px solid white;"></div>
+              <h4 style="margin: 0 0 0.25rem 0;">Files Uploaded</h4>
+              <p style="margin: 0; color: #999; font-size: 0.9rem;">October 14, 2024 • 10:30 AM</p>
+              <p style="margin-top: 0.5rem; color: #666;">Floor plan and elevation drawings uploaded by Ahmed Ali</p>
+            </div>
+
+            <!-- Timeline Item -->
+            <div style="margin-bottom: 2rem; position: relative;">
+              <div style="position: absolute; left: -2.75rem; top: 0; width: 12px; height: 12px; background: #185FA5; border-radius: 50%; border: 3px solid white;"></div>
+              <h4 style="margin: 0 0 0.25rem 0;">Status Updated</h4>
+              <p style="margin: 0; color: #999; font-size: 0.9rem;">October 12, 2024 • 2:15 PM</p>
+              <p style="margin-top: 0.5rem; color: #666;">Project moved to "Under Review" for technical evaluation</p>
+            </div>
+
+            <!-- Timeline Item -->
+            <div style="margin-bottom: 2rem; position: relative;">
+              <div style="position: absolute; left: -2.75rem; top: 0; width: 12px; height: 12px; background: #185FA5; border-radius: 50%; border: 3px solid white;"></div>
+              <h4 style="margin: 0 0 0.25rem 0;">Project Created</h4>
+              <p style="margin: 0; color: #999; font-size: 0.9rem;">October 8, 2024 • 9:45 AM</p>
+              <p style="margin-top: 0.5rem; color: #666;">Initial project quotation approved and project initiated</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Section -->
+      <div class="card" style="margin-top: 2rem;">
+        <div class="card-header">
+          <h3 class="card-title">Need Help?</h3>
+        </div>
+        <div class="card-body">
+          <p>If you have any questions about your project, please don't hesitate to contact our team.</p>
+          <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+            <button class="btn btn-primary">
+              <i class="fas fa-envelope"></i> Send Message
+            </button>
+            <button class="btn btn-secondary">
+              <i class="fas fa-phone"></i> Call Us
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3>SKOON</h3>
+          <p>Architecture & Engineering Consultants</p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="dashboard-client.html">My Projects</a></li>
+            <li><a href="#">Support</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <ul>
+            <li><a href="mailto:info@skoon.ae">info@skoon.ae</a></li>
+            <li><a href="tel:+97144xxx">+971 4 XXX XXXX</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 SKOON Architecture. <span data-i18n="footer_rights">All rights reserved</span></p>
+      </div>
+    </div>
+  </footer>
 
   <script src="app.js"></script>
   <script>
-    // Initialize
-    const urlParams = new URLSearchParams(window.location.search);
-    const langParam = urlParams.get('lang');
-    if (langParam) currentLanguage = langParam;
-    setLanguage(currentLanguage);
-
-    // Get project ID from localStorage
-    const projectId = localStorage.getItem('currentProject');
-    const project = getProject(projectId);
-
-    if (!project) {
-      alert('Project not found');
-      window.location.href = 'dashboard-employee.html';
-    }
-
-    // Populate page with project data
-    document.getElementById('project-code-hero').textContent = project.code;
-    document.getElementById('project-title').textContent = project.name;
-    document.getElementById('project-subtitle').textContent = `${project.stage} • ${project.location}`;
-    
-    document.getElementById('info-owner').textContent = project.owner;
-    document.getElementById('info-area').textContent = project.area;
-    document.getElementById('info-location').textContent = project.location;
-    document.getElementById('info-stage').textContent = project.stage;
-    document.getElementById('info-type').textContent = project.type;
-    document.getElementById('info-status').textContent = project.stage;
-    document.getElementById('info-status').className = `status-badge-large status-${project.status}`;
-    
-    document.getElementById('status-main').textContent = project.stage;
-    document.getElementById('status-main').className = `status-badge-large status-${project.status}`;
-    
-    document.getElementById('overview-text').textContent = project.description;
-    
-    // Set project hero image
-    document.getElementById('project-hero-img').src = `project-images/${project.image}`;
-
-    // Tab switching
-    function switchTab(e, tabName) {
-      e.preventDefault();
-      
+    function switchTab(tabName) {
       // Hide all tabs
-      document.querySelectorAll('.tab-content').forEach(tab => {
-        tab.classList.remove('active');
+      document.querySelectorAll('.tab-content').forEach((el) => {
+        el.style.display = 'none';
       });
-      
-      // Remove active from all buttons
-      document.querySelectorAll('.tab').forEach(tab => {
-        tab.classList.remove('active');
-      });
-      
-      // Show selected tab and button
-      document.getElementById(tabName).classList.add('active');
-      e.target.classList.add('active');
-    }
 
-    // Load and display documents dynamically
-    function loadDocuments(project) {
-      const container = document.getElementById('documents-container');
-      if (!project.documents) {
-        container.innerHTML = '<p style="color: var(--text-secondary);">No documents available yet.</p>';
-        return;
+      // Remove active class from all buttons
+      document.querySelectorAll('.tab-btn').forEach((btn) => {
+        btn.style.color = '#999';
+        btn.style.borderBottomColor = 'transparent';
+      });
+
+      // Show selected tab
+      const tab = document.getElementById(`tab-${tabName}`);
+      if (tab) {
+        tab.style.display = 'block';
       }
 
-      const sections = [
-        { key: 'drawings', label: '📐 Drawings', icon: '🖼️' },
-        { key: 'specifications', label: '📋 Specifications & Bill of Quantities', icon: '📄' },
-        { key: 'tender', label: '📑 Tender & Contracts', icon: '📝' },
-        { key: 'reports', label: '📈 Reports & Analysis', icon: '💰' }
-      ];
-
-      let html = '';
-
-      sections.forEach(section => {
-        if (project.documents[section.key] && project.documents[section.key].length > 0) {
-          html += `<h4 style="color: var(--text-primary); font-size: 1.1rem; margin: 1.5rem 0 1rem 0;">${section.label}</h4>`;
-          html += '<ul class="document-list">';
-          
-          project.documents[section.key].forEach(docName => {
-            const docPath = `documents/${project.code}/${section.key}/${docName}`;
-            html += `
-              <li class="document-item">
-                <div style="display: flex; align-items: center;">
-                  <span class="document-icon">${section.icon}</span>
-                  <div class="document-info">
-                    <div class="document-name">${docName}</div>
-                    <div class="document-status available">Available</div>
-                  </div>
-                </div>
-                <button class="btn-document" onclick="downloadDocument('${docPath}', '${docName}')">Download</button>
-              </li>
-            `;
-          });
-          
-          html += '</ul>';
-        }
-      });
-
-      container.innerHTML = html;
+      // Mark button as active
+      event.target.closest('.tab-btn').style.color = '#185FA5';
+      event.target.closest('.tab-btn').style.borderBottomColor = '#185FA5';
     }
-
-    // Download function
-    function downloadDocument(path, name) {
-      // In production, this would fetch the actual file
-      // For now, show a message or redirect to the file location
-      const link = document.createElement('a');
-      link.href = path;
-      link.download = name;
-      link.style.display = 'none';
-      document.body.appendChild(link);
-      
-      // Try to download, if it fails, open in new tab
-      link.click();
-      
-      setTimeout(() => {
-        document.body.removeChild(link);
-      }, 100);
-    }
-
-    // Load documents for current project
-    loadDocuments(project);
-
-    // Add missing translation
-    translations.en.project_overview = 'Overview';
-    translations.en.project_documents = 'Project Documents';
-    translations.en.project_timeline = 'Timeline';
-    translations.en.project_description = 'Description';
-    translations.en.project_scope = 'Scope of Work';
-    translations.en.common_back = 'Back';
-    
-    translations.ar.project_overview = 'نظرة عامة';
-    translations.ar.project_documents = 'المستندات';
-    translations.ar.project_timeline = 'المخطط الزمني';
-    translations.ar.project_description = 'الوصف';
-    translations.ar.project_scope = 'نطاق العمل';
-    translations.ar.common_back = 'رجوع';
   </script>
 </body>
 </html>

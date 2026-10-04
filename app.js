@@ -1,570 +1,639 @@
 // ================================
 // SKOON ARCHITECTURE PORTAL
-// Complete Multi-language & Data System
+// Multi-language & Navigation System
 // ================================
 
-// Language Management
-let currentLanguage = localStorage.getItem('language') || 'en';
-
+// Language Strings
 const translations = {
   en: {
     // Navigation
-    nav_home: 'Home',
     nav_projects: 'Projects',
     nav_about: 'About',
     nav_services: 'Services',
     nav_contact: 'Contact',
     nav_portal: 'Portal',
     nav_logout: 'Logout',
-    nav_login: 'Login',
 
-    // Login Pages
+    // Home Page
+    hero_title: 'SKOON Architecture & Engineering',
+    hero_subtitle: 'Project Management & Tender Portal',
+    hero_cta: 'Get Started',
+    hero_desc: 'Streamline your project workflow with our integrated architecture platform',
+
+    // Features
+    feature_1_title: 'Project Management',
+    feature_1_desc: 'Track and manage all your projects in one centralized platform',
+    feature_2_title: 'Smart Quotations',
+    feature_2_desc: 'Get instant cost estimates with our advanced calculation system',
+    feature_3_title: 'Document Management',
+    feature_3_desc: 'Organize all project files, contracts, and drawings securely',
+    feature_4_title: 'Real-time Updates',
+    feature_4_desc: 'Stay informed with instant notifications on project status',
+
+    // Services
+    services_design: 'Design',
+    services_supervision: 'Supervision',
+    services_consulting: 'Consulting',
+
+    // Login
     login_title: 'Sign In',
-    login_employee: 'Employee Login',
-    login_client: 'Client Login',
-    login_username: 'Username or Email',
+    login_email: 'Email Address',
     login_password: 'Password',
     login_submit: 'Sign In',
     login_forgot: 'Forgot Password?',
-    login_switch_employee: 'Employee? Login here',
-    login_switch_client: 'Client? Login here',
-    login_error: 'Invalid username or password',
-    login_required: 'Please fill in all fields',
+    login_no_account: "Don't have an account?",
+    login_signup: 'Sign Up',
 
     // Dashboard
-    dashboard_welcome: 'Welcome',
-    dashboard_employees: 'Employees',
-    dashboard_projects: 'Projects',
-    dashboard_new_project: 'New Project',
+    dashboard_welcome: 'Welcome back',
+    dashboard_projects: 'Your Projects',
+    dashboard_new_project: 'Request Quotation',
+    dashboard_my_projects: 'My Projects',
     dashboard_active: 'Active',
     dashboard_under_review: 'Under Review',
-    dashboard_tender: 'Tender Stage',
-    dashboard_construction: 'Construction',
+    dashboard_approved: 'Approved',
     dashboard_completed: 'Completed',
-    dashboard_my_projects: 'My Projects',
     dashboard_view_details: 'View Details',
-    dashboard_project_stage: 'Project Stage',
-    dashboard_owner: 'Owner',
-    dashboard_contact: 'Contact',
+
+    // Project Details
+    project_title: 'Project Details',
+    project_area: 'Area',
+    project_scope: 'Scope',
+    project_status: 'Status',
+    project_files: 'Files',
+    project_drawings: 'Drawings',
+    project_boq: 'Bill of Quantities',
+    project_specifications: 'Specifications',
+    project_contracts: 'Contracts',
+    project_reports: 'Reports',
+    project_no_files: 'No files uploaded yet',
+    project_upload: 'Upload File',
+    project_download: 'Download',
+    project_view: 'View',
+
+    // Quotation Form
+    quotation_title: 'Request Quotation',
+    quotation_subtitle: 'Tell us about your project',
+    quotation_project_name: 'Project Name',
+    quotation_area: 'Total Area',
+    quotation_scope: 'Project Type',
+    quotation_location: 'Location',
+    quotation_calculate: 'Calculate Estimate',
+    quotation_save: 'Save Request',
+    quotation_cancel: 'Cancel',
+    quotation_estimate: 'Initial Estimate',
+    quotation_approximate: 'Approximate value - Subject to change',
+
+    // Admin Dashboard
+    admin_dashboard: 'Dashboard',
+    admin_clients: 'Clients',
+    admin_projects_list: 'Projects',
+    admin_settings: 'Settings',
+    admin_total_clients: 'Total Clients',
+    admin_active_projects: 'Active Projects',
+    admin_under_review_count: 'Under Review',
+    admin_new_requests: 'New Requests',
+    admin_recent_projects: 'Recent Projects',
+    admin_client_name: 'Client',
+    admin_project_name: 'Project',
+    admin_action: 'Action',
+    admin_edit: 'Edit',
+    admin_view: 'View',
+    admin_delete: 'Delete',
+    admin_change_status: 'Change Status',
+
+    // Footer
+    footer_about: 'About Us',
+    footer_services: 'Services',
+    footer_contact: 'Contact',
+    footer_privacy: 'Privacy Policy',
+    footer_terms: 'Terms of Service',
+    footer_rights: 'All rights reserved',
+    footer_address: 'Dubai, UAE',
+    footer_phone: '+971 4 XXX XXXX',
+    footer_email: 'info@skoon.ae',
 
     // Common
     common_search: 'Search',
     common_filter: 'Filter',
-    common_logout: 'Logout',
-    common_language: 'اللغة العربية',
-    common_close: 'Close',
-    common_save: 'Save',
-    common_cancel: 'Cancel',
-    common_edit: 'Edit',
+    common_sort: 'Sort',
+    common_export: 'Export',
     common_delete: 'Delete',
-    common_view: 'View',
-    common_download: 'Download',
-    common_upload: 'Upload',
-    common_status: 'Status',
-    common_date: 'Date',
-    common_area: 'Area',
-    common_location: 'Location',
-    common_scope: 'Scope',
-
-    // Footer
-    footer_about: 'About SKOON',
-    footer_services: 'Our Services',
-    footer_contact: 'Contact Us',
-    footer_address: 'Dubai, UAE',
-    footer_phone: '+971 4 XXX XXXX',
-    footer_email: 'info@skoon.ae',
-    footer_rights: 'All rights reserved',
-
-    // Messages
-    msg_logout_success: 'Logged out successfully',
-    msg_login_success: 'Welcome to SKOON Portal',
-    msg_error: 'An error occurred',
-
-    // Project Details
-    project_overview: 'Overview',
-    project_files: 'Files',
-    project_timeline: 'Timeline',
-    project_description: 'Description',
-    project_scope: 'Scope of Work',
-    project_documents: 'Project Documents',
-    project_no_files: 'No projects found',
-    common_name: 'Name',
-    common_email: 'Email',
-    common_phone: 'Phone',
-    common_company: 'Company',
-    common_back: 'Back',
-    common_clear: 'Clear',
+    common_edit: 'Edit',
+    common_save: 'Save',
+    common_submit: 'Submit',
+    common_cancel: 'Cancel',
+    common_loading: 'Loading...',
+    common_error: 'Error',
+    common_success: 'Success',
+    common_warning: 'Warning',
+    common_yes: 'Yes',
+    common_no: 'No',
+    common_sqm: 'sqm',
+    common_sqft: 'sqft',
+    common_aed: 'AED',
+    common_usd: 'USD',
   },
-
   ar: {
     // Navigation
-    nav_home: 'الرئيسية',
     nav_projects: 'المشاريع',
-    nav_about: 'عن الشركة',
+    nav_about: 'من نحن',
     nav_services: 'الخدمات',
-    nav_contact: 'تواصل معنا',
+    nav_contact: 'اتصل بنا',
     nav_portal: 'البوابة',
-    nav_logout: 'تسجيل خروج',
-    nav_login: 'دخول',
+    nav_logout: 'تسجيل الخروج',
 
-    // Login Pages
-    login_title: 'تسجيل دخول',
-    login_employee: 'دخول الموظفين',
-    login_client: 'دخول العميل',
-    login_username: 'اسم المستخدم أو البريد',
+    // Home Page
+    hero_title: 'سكون للاستشارات الهندسية',
+    hero_subtitle: 'منصة إدارة المشاريع والمناقصات',
+    hero_cta: 'ابدأ الآن',
+    hero_desc: 'بسّط سير عمل مشاريعك باستخدام منصتنا المتكاملة',
+
+    // Features
+    feature_1_title: 'إدارة المشاريع',
+    feature_1_desc: 'تتبع وإدارة جميع مشاريعك من منصة واحدة',
+    feature_2_title: 'عروض أسعار ذكية',
+    feature_2_desc: 'احصل على تقديرات تكاليف فوري باستخدام نظامنا المتقدم',
+    feature_3_title: 'إدارة الملفات',
+    feature_3_desc: 'نظّم جميع ملفات المشروع والعقود والمخططات بأمان',
+    feature_4_title: 'تحديثات فورية',
+    feature_4_desc: 'ابقَ مطلعاً على حالة المشروع من خلال التنبيهات الفورية',
+
+    // Services
+    services_design: 'التصميم',
+    services_supervision: 'الإشراف',
+    services_consulting: 'الاستشارات',
+
+    // Login
+    login_title: 'تسجيل الدخول',
+    login_email: 'البريد الإلكتروني',
     login_password: 'كلمة المرور',
     login_submit: 'دخول',
-    login_forgot: 'نسيت كلمة المرور؟',
-    login_switch_employee: 'موظف؟ ادخل من هنا',
-    login_switch_client: 'عميل؟ ادخل من هنا',
-    login_error: 'بيانات الدخول غير صحيحة',
-    login_required: 'يرجى ملء جميع الحقول',
+    login_forgot: 'هل نسيت كلمة المرور؟',
+    login_no_account: 'ليس لديك حساب؟',
+    login_signup: 'إنشاء حساب',
 
     // Dashboard
-    dashboard_welcome: 'أهلا وسهلا',
-    dashboard_employees: 'الموظفون',
-    dashboard_projects: 'المشاريع',
-    dashboard_new_project: 'مشروع جديد',
-    dashboard_active: 'نشط',
-    dashboard_under_review: 'قيد المراجعة',
-    dashboard_tender: 'مرحلة المناقصة',
-    dashboard_construction: 'قيد الإنشاء',
-    dashboard_completed: 'مكتمل',
+    dashboard_welcome: 'أهلاً وسهلاً',
+    dashboard_projects: 'مشاريعك',
+    dashboard_new_project: 'طلب عرض سعر',
     dashboard_my_projects: 'مشاريعي',
+    dashboard_active: 'نشط',
+    dashboard_under_review: 'تحت المراجعة',
+    dashboard_approved: 'معتمد',
+    dashboard_completed: 'منجز',
     dashboard_view_details: 'عرض التفاصيل',
-    dashboard_project_stage: 'مرحلة المشروع',
-    dashboard_owner: 'المالك',
-    dashboard_contact: 'التواصل',
+
+    // Project Details
+    project_title: 'تفاصيل المشروع',
+    project_area: 'المساحة',
+    project_scope: 'النطاق',
+    project_status: 'الحالة',
+    project_files: 'الملفات',
+    project_drawings: 'المخططات',
+    project_boq: 'جدول الكميات',
+    project_specifications: 'المواصفات',
+    project_contracts: 'العقود',
+    project_reports: 'التقارير',
+    project_no_files: 'لم يتم تحميل أي ملفات',
+    project_upload: 'تحميل ملف',
+    project_download: 'تنزيل',
+    project_view: 'عرض',
+
+    // Quotation Form
+    quotation_title: 'طلب عرض سعر',
+    quotation_subtitle: 'أخبرنا عن مشروعك',
+    quotation_project_name: 'اسم المشروع',
+    quotation_area: 'إجمالي المساحة',
+    quotation_scope: 'نوع المشروع',
+    quotation_location: 'الموقع',
+    quotation_calculate: 'احسب التقدير',
+    quotation_save: 'حفظ الطلب',
+    quotation_cancel: 'إلغاء',
+    quotation_estimate: 'التقدير الأولي',
+    quotation_approximate: 'قيمة تقريبية - قابلة للتغيير',
+
+    // Admin Dashboard
+    admin_dashboard: 'لوحة التحكم',
+    admin_clients: 'العملاء',
+    admin_projects_list: 'المشاريع',
+    admin_settings: 'الإعدادات',
+    admin_total_clients: 'إجمالي العملاء',
+    admin_active_projects: 'المشاريع النشطة',
+    admin_under_review_count: 'تحت المراجعة',
+    admin_new_requests: 'طلبات جديدة',
+    admin_recent_projects: 'آخر المشاريع',
+    admin_client_name: 'العميل',
+    admin_project_name: 'المشروع',
+    admin_action: 'الإجراء',
+    admin_edit: 'تعديل',
+    admin_view: 'عرض',
+    admin_delete: 'حذف',
+    admin_change_status: 'تغيير الحالة',
+
+    // Footer
+    footer_about: 'من نحن',
+    footer_services: 'الخدمات',
+    footer_contact: 'اتصل بنا',
+    footer_privacy: 'سياسة الخصوصية',
+    footer_terms: 'شروط الخدمة',
+    footer_rights: 'جميع الحقوق محفوظة',
+    footer_address: 'دبي، الإمارات العربية المتحدة',
+    footer_phone: '+971 4 XXX XXXX',
+    footer_email: 'info@skoon.ae',
 
     // Common
     common_search: 'بحث',
     common_filter: 'تصفية',
-    common_logout: 'تسجيل خروج',
-    common_language: 'English',
-    common_close: 'إغلاق',
-    common_save: 'حفظ',
-    common_cancel: 'إلغاء',
-    common_edit: 'تعديل',
+    common_sort: 'ترتيب',
+    common_export: 'تصدير',
     common_delete: 'حذف',
-    common_view: 'عرض',
-    common_download: 'تحميل',
-    common_upload: 'رفع',
-    common_status: 'الحالة',
-    common_date: 'التاريخ',
-    common_area: 'المساحة',
-    common_location: 'الموقع',
-    common_scope: 'نطاق العمل',
-
-    // Footer
-    footer_about: 'عن سكون',
-    footer_services: 'خدماتنا',
-    footer_contact: 'اتصل بنا',
-    footer_address: 'دبي، الإمارات',
-    footer_phone: '+971 4 XXX XXXX',
-    footer_email: 'info@skoon.ae',
-    footer_rights: 'جميع الحقوق محفوظة',
-
-    // Messages
-    msg_logout_success: 'تم تسجيل الخروج بنجاح',
-    msg_login_success: 'أهلا بك في بوابة سكون',
-    msg_error: 'حدث خطأ ما',
-
-    // Project Details
-    project_overview: 'نظرة عامة',
-    project_files: 'الملفات',
-    project_timeline: 'المخطط الزمني',
-    project_description: 'الوصف',
-    project_scope: 'نطاق العمل',
-    project_documents: 'وثائق المشروع',
-    project_no_files: 'لم يتم العثور على مشاريع',
-    common_name: 'الاسم',
-    common_email: 'البريد الإلكتروني',
-    common_phone: 'الهاتف',
-    common_company: 'الشركة',
-    common_back: 'رجوع',
-    common_clear: 'مسح',
+    common_edit: 'تعديل',
+    common_save: 'حفظ',
+    common_submit: 'إرسال',
+    common_cancel: 'إلغاء',
+    common_loading: 'جاري التحميل...',
+    common_error: 'خطأ',
+    common_success: 'نجح',
+    common_warning: 'تحذير',
+    common_yes: 'نعم',
+    common_no: 'لا',
+    common_sqm: 'متر مربع',
+    common_sqft: 'قدم مربعة',
+    common_aed: 'درهم إماراتي',
+    common_usd: 'دولار أمريكي',
   },
 };
 
-// Translation Helper
-function t(key) {
-  return translations[currentLanguage]?.[key] || translations.en[key] || key;
-}
+// Language Management
+let currentLanguage = localStorage.getItem('language') || 'en';
 
-// Set Language
 function setLanguage(lang) {
   currentLanguage = lang;
   localStorage.setItem('language', lang);
   document.documentElement.lang = lang;
   document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+  // Update all elements with data-i18n attribute
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    const key = el.getAttribute('data-i18n');
+    if (translations[lang][key]) {
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = translations[lang][key];
+      } else {
+        el.textContent = translations[lang][key];
+      }
+    }
+  });
+
+  updateActiveLanguageButton();
 }
 
-// ================================
-// USER ACCOUNTS DATA
-// ================================
+function t(key) {
+  return translations[currentLanguage][key] || key;
+}
 
-// Employee Accounts
-const employeeAccounts = {
-  'admin': { password: '123', name: 'Admin', role: 'admin', email: 'admin@skoon.ae' },
-  'khalid': { password: '123', name: 'Khalid', role: 'deputy-gm', email: 'khalid@skoon.ae' },
-  'eslam': { password: '123', name: 'Eslam', role: 'manager', email: 'eslam@skoon.ae' },
-  'ahmad': { password: '123', name: 'Ahmad', role: 'employee', email: 'ahmad@skoon.ae' },
-  'iman': { password: '123', name: 'Iman', role: 'employee', email: 'iman@skoon.ae' },
-};
+function updateActiveLanguageButton() {
+  document.querySelectorAll('.lang-btn').forEach((btn) => {
+    btn.classList.remove('active');
+    if (btn.getAttribute('data-lang') === currentLanguage) {
+      btn.classList.add('active');
+    }
+  });
+}
 
-// Client Accounts
-const clientAccounts = {
-  'saeed-kharbash': { password: '123', name: 'Saeed Kharbash', email: 'saeed@example.com', projectId: 1 },
-  'mana-abdulaziz': { password: '123', name: 'Mana Abdulaziz', email: 'mana@example.com', projectId: 2 },
-  'eman-abdelqadir': { password: '123', name: 'Eman Abdelqadir', email: 'eman@example.com', projectId: 3 },
-  'rashed-al-janahi': { password: '123', name: 'Rashed Al-Janahi', email: 'rashed@example.com', projectId: 4 },
-  'essa-kharbash': { password: '123', name: 'Essa Kharbash', email: 'essa@example.com', projectId: 5 },
-  'majed-almheiri': { password: '123', name: 'Majed Almheiri', email: 'majed@example.com', projectId: 6 },
-  'hanif-ebrahimi': { password: '123', name: 'Hanif Ebrahimi', email: 'hanif@example.com', projectId: 7 },
-  'jaiedco': { password: '123', name: 'Jaiedco Development', email: 'jaiedco@example.com', projectId: 8 },
-  'aurum-hotel': { password: '123', name: 'Aurum State Hotel', email: 'aurum@example.com', projectId: 9 },
-};
+// Initialize Language
+function initLanguage() {
+  document.documentElement.lang = currentLanguage;
+  document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
+  setLanguage(currentLanguage);
+}
 
-// ================================
-// PROJECTS DATA - 9 Real Projects
-// ================================
+// Navigation Management
+function navigateTo(page) {
+  window.location.href = `${page}.html?lang=${currentLanguage}`;
+}
 
-const projectsData = [
-  {
-    id: 1,
-    code: 'SD-P153',
-    name: 'Saeed Kharbash Villa',
-    owner: 'Saeed Kharbash',
-    status: 'construction',
-    stage: 'Under Construction',
-    location: 'Dubai',
-    area: '850 m²',
-    image: 'SD-P153-Saeed-Kharbash.svg',
-    description: 'Modern luxury villa with contemporary design',
-    type: 'Residential',
-    documents: {
-      drawings: ['Foundation Plan.pdf', 'Floor Plans.pdf', 'Elevations.pdf'],
-      specifications: ['Architectural Specs.pdf', 'MEP Specifications.pdf'],
-      tender: ['BOQ.pdf', 'Tender Invitation.pdf'],
-      reports: ['Design Report.pdf', 'Cost Estimate.pdf'],
-    },
-  },
-  {
-    id: 2,
-    code: 'SD-P238',
-    name: 'Mana Abdulaziz Villa',
-    owner: 'Mana Abdulaziz',
-    status: 'contract',
-    stage: 'Contract Signing',
-    location: 'Dubai',
-    area: '920 m²',
-    image: 'SD-P238-Mana-Abdulaziz-Front.svg',
-    description: 'Contemporary villa with modern architectural design',
-    type: 'Residential',
-    documents: {
-      drawings: ['Site Plan.pdf', 'Architectural Plans.pdf', 'Sections.pdf'],
-      specifications: ['General Specs.pdf', 'Finishes Schedule.pdf'],
-      tender: ['BOQ - Structural.pdf', 'BOQ - Finishes.pdf', 'Tender Terms.pdf'],
-      reports: ['Preliminary Design.pdf'],
-    },
-  },
-  {
-    id: 3,
-    code: 'SD-P253',
-    name: 'Eman Abdelqadir Villa',
-    owner: 'Eman Abdelqadir',
-    status: 'tender',
-    stage: 'Tender Stage',
-    location: 'Dubai',
-    area: '780 m²',
-    image: 'SD-P253-Eman-Abdelqadir-Front.svg',
-    description: 'Classical modern villa with premium finishes',
-    type: 'Residential',
-    documents: {
-      drawings: ['Site Plan.pdf', 'Floor Plans.pdf', 'Elevation & Sections.pdf'],
-      specifications: ['Architectural Specifications.pdf', 'Material Specifications.pdf'],
-      tender: ['BOQ - All Works.pdf', 'Tender Conditions.pdf'],
-      reports: ['Design Concept.pdf', 'Cost Analysis.pdf'],
-    },
-  },
-  {
-    id: 4,
-    code: 'SD-P251',
-    name: 'Rashed Al-Janahi Villa',
-    owner: 'Rashed Al-Janahi',
-    status: 'construction',
-    stage: 'Under Construction',
-    location: 'Dubai',
-    area: '1,200 m²',
-    image: 'SD-P251-Rashed-Al-Janahi-Front.svg',
-    description: 'Luxury villa with elegant design and swimming pool',
-    type: 'Residential',
-    documents: {
-      drawings: ['Master Plan.pdf', 'Architectural Plans.pdf', 'Structural Plans.pdf'],
-      specifications: ['Full Specifications.pdf', 'MEP Specifications.pdf'],
-      tender: ['BOQ - Complete.pdf', 'Tender Documents.pdf'],
-      reports: ['Design Report.pdf', 'Project Timeline.pdf'],
-    },
-  },
-  {
-    id: 5,
-    code: 'SD-P281',
-    name: 'Essa Kharbash Villa',
-    owner: 'Essa Kharbash',
-    status: 'construction',
-    stage: 'Under Construction',
-    location: 'Dubai',
-    area: '950 m²',
-    image: 'SD-P281-Essa-Kharbash-Front-1.svg',
-    description: 'Contemporary villa with bold architectural elements',
-    type: 'Residential',
-    documents: {
-      drawings: ['Twin Villa Plans.pdf', 'Landscaping Plan.pdf', 'Site Layout.pdf'],
-      specifications: ['Twin Villa Specs.pdf', 'Utility Specifications.pdf'],
-      tender: ['BOQ - Twin Project.pdf', 'Tender Invitation.pdf'],
-      reports: ['Design Report.pdf', 'Cost Estimate.pdf'],
-    },
-  },
-  {
-    id: 6,
-    code: 'SD-P284',
-    name: 'Majed Almheiri Villa (Linear House)',
-    owner: 'Majed Almheiri',
-    status: 'construction',
-    stage: 'Under Construction',
-    location: 'Dubai',
-    area: '1,100 m²',
-    image: 'SD-P284-Majed-Almheiri-Linear-House.svg',
-    description: 'Linear modern villa with sleek design',
-    documents: {
-      drawings: ["Linear House Plans.pdf", "Sections.pdf", "Elevations.pdf"],
-      specifications: ["Linear Design Specs.pdf", "Finishes Specs.pdf"],
-      tender: ["BOQ - Linear.pdf", "Tender Documents.pdf"],
-      reports: ["Design Report - Linear House.pdf", "Construction Timeline.pdf"],
-    },
-    type: 'Residential',
-  },
-  {
-    id: 7,
-    code: 'SD-P301',
-    name: 'Hanif Ebrahimi Villa',
-    owner: 'Hanif Ebrahimi',
-    status: 'construction',
-    stage: 'Under Construction',
-    location: 'Dubai',
-    area: '1,350 m²',
-    image: 'SD-P301-Hanif-Ebrahimi-Garage-Front.svg',
-    description: 'Premium villa with architectural excellence',
-    documents: {
-      drawings: ["Garage Plans.pdf", "Parking Layout.pdf", "Elevations.pdf"],
-      specifications: ["Garage Specifications.pdf", "Material Schedule.pdf"],
-      tender: ["BOQ - Garage.pdf", "Tender Terms.pdf"],
-      reports: ["Design Report - Garage.pdf", "Cost Estimation.pdf"],
-    },
-    type: 'Residential',
-  },
-  {
-    id: 8,
-    code: 'SD-P338',
-    name: 'Jaiedco Development (Twin Towers)',
-    owner: 'Jaiedco Development',
-    status: 'construction',
-    stage: 'Under Construction',
-    location: 'Dubai',
-    area: '45,000 m²',
-    image: 'SD-P338-Jaiedco-Main-Tower-1.svg',
-    description: 'Premium residential development with two towers',
-    documents: {
-      drawings: ["Tower Master Plan.pdf", "Floor Plans.pdf", "Structural Plans.pdf"],
-      specifications: ["Building Specifications.pdf", "MEP Full Specs.pdf", "Finishes Schedule.pdf"],
-      tender: ["BOQ - Tower - Part 1.pdf", "BOQ - Tower - Part 2.pdf", "Tender Documents.pdf"],
-      reports: ["Design Report - Main Tower.pdf", "Project Delivery Schedule.pdf", "Cost Analysis.pdf"],
-    },
-    type: 'Commercial',
-  },
-  {
-    id: 9,
-    code: 'SD-P256',
-    name: 'Aurum State Hotel',
-    owner: 'Aurum State Hotel',
-    status: 'construction',
-    stage: 'Under Construction',
-    location: 'Dubai',
-    area: '28,000 m²',
-    image: 'SD-P256-AURUM-Front-View.svg',
-    description: 'Luxury hotel with premium amenities and design',
-    documents: {
-      drawings: ["Hotel Master Plan.pdf", "Floor Plans.pdf", "Sections.pdf", "Elevations.pdf"],
-      specifications: ["Hotel Specifications.pdf", "MEP Specifications.pdf", "Finishes Schedule.pdf"],
-      tender: ["BOQ - Aurum Hotel.pdf", "BOQ - Finishes.pdf", "Tender Terms.pdf"],
-      reports: ["Design Report - Aurum.pdf", "Project Schedule.pdf", "Cost Estimation.pdf"],
-    },
-    type: 'Hospitality',
-  },
-];
+// Modal Management
+function openModal(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.classList.add('active');
+  }
+}
 
-// ================================
-// AUTHENTICATION SYSTEM
-// ================================
+function closeModal(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.classList.remove('active');
+  }
+}
 
+// Close modal when clicking outside
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('modal')) {
+    e.target.classList.remove('active');
+  }
+});
+
+// Form Handling
+function handleFormSubmit(formId, callback) {
+  const form = document.getElementById(formId);
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData);
+      callback(data);
+      form.reset();
+    });
+  }
+}
+
+// Auth Management
 const authService = {
-  // Employee Login
-  loginEmployee(username, password) {
-    const account = employeeAccounts[username.toLowerCase()];
-    if (!account || account.password !== password) {
-      return null;
-    }
-    
+  login(email, password) {
+    // Simulate login
     const userData = {
-      id: username,
-      name: account.name,
-      email: account.email,
-      role: account.role,
-      type: 'employee',
+      id: 1,
+      name: email.split('@')[0],
+      email: email,
+      role: email.includes('admin') ? 'admin' : 'client',
     };
-    
     localStorage.setItem('user', JSON.stringify(userData));
-    localStorage.setItem('token', 'token-' + Date.now());
-    localStorage.setItem('loginType', 'employee');
-    
+    localStorage.setItem('token', 'fake-token-' + Date.now());
     return userData;
   },
 
-  // Client Login
-  loginClient(username, password) {
-    const account = clientAccounts[username.toLowerCase()];
-    if (!account || account.password !== password) {
-      return null;
-    }
-    
-    const userData = {
-      id: username,
-      name: account.name,
-      email: account.email,
-      type: 'client',
-      projectId: account.projectId,
-    };
-    
-    localStorage.setItem('user', JSON.stringify(userData));
-    localStorage.setItem('token', 'token-' + Date.now());
-    localStorage.setItem('loginType', 'client');
-    
-    return userData;
-  },
-
-  // Logout
   logout() {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
-    localStorage.removeItem('loginType');
     window.location.href = 'index.html';
   },
 
-  // Get Current User
   getUser() {
     const user = localStorage.getItem('user');
     return user ? JSON.parse(user) : null;
   },
 
-  // Check if Logged In
   isLoggedIn() {
     return !!localStorage.getItem('token');
   },
 
-  // Get User Type
-  getUserType() {
-    return localStorage.getItem('loginType') || null;
-  },
-
-  // Check if Employee
-  isEmployee() {
-    return this.getUserType() === 'employee';
-  },
-
-  // Check if Client
-  isClient() {
-    return this.getUserType() === 'client';
+  isAdmin() {
+    const user = this.getUser();
+    return user && user.role === 'admin';
   },
 };
 
-// ================================
-// PAGE FUNCTIONS
-// ================================
+// Protected Page Check
+function checkAuth() {
+  const page = document.body.id;
+  const protectedPages = ['dashboard-client', 'dashboard-admin', 'project-detail', 'quotation-form'];
 
-// Initialize Page
-function initPage() {
-  // Set Language
-  setLanguage(currentLanguage);
-  
-  // Check Authentication
+  if (protectedPages.includes(page) && !authService.isLoggedIn()) {
+    window.location.href = 'login.html';
+  }
+
+  if (page === 'dashboard-admin' && !authService.isAdmin()) {
+    window.location.href = 'dashboard-client.html';
+  }
+
+  // Display user info
   const user = authService.getUser();
-  const userNameEl = document.getElementById('user-name');
-  const userRoleEl = document.getElementById('user-role');
-  
   if (user) {
-    if (userNameEl) userNameEl.textContent = user.name;
-    if (userRoleEl) userRoleEl.textContent = user.type === 'employee' ? t('login_employee') : t('login_client');
+    const userNameEl = document.getElementById('user-name');
+    if (userNameEl) {
+      userNameEl.textContent = user.name;
+    }
   }
 }
 
-// Load Projects for Dashboard
-function loadProjects(containerId) {
+// Mock Data
+const mockData = {
+  projects: [
+    {
+      id: 1,
+      name: 'Villa Al-Amali',
+      area: 450,
+      scope: 'Residential Villa',
+      status: 'under-review',
+      lastUpdate: '2024-10-14',
+      files: [
+        { name: 'Floor Plan - Rev 02.pdf', category: 'drawings', date: '2024-10-14' },
+        { name: 'Elevation - Rev 01.pdf', category: 'drawings', date: '2024-10-12' },
+        { name: 'BOQ_Final_Rev03.xlsx', category: 'boq', date: '2024-10-10' },
+      ],
+    },
+    {
+      id: 2,
+      name: 'Commercial Project',
+      area: 1200,
+      scope: 'Commercial',
+      status: 'approved',
+      lastUpdate: '2024-10-13',
+      files: [],
+    },
+    {
+      id: 3,
+      name: 'Residential Complex',
+      area: 3000,
+      scope: 'Mixed Use',
+      status: 'pending',
+      lastUpdate: '2024-10-08',
+      files: [],
+    },
+  ],
+
+  clients: [
+    { id: 1, name: 'Ahmed Ali', email: 'ahmed@example.com', projects: 3, lastActive: '2024-10-14' },
+    { id: 2, name: 'Fatima Mohammed', email: 'fatima@example.com', projects: 2, lastActive: '2024-10-13' },
+    { id: 3, name: 'Mohammed Hassan', email: 'mohammed@example.com', projects: 1, lastActive: '2024-10-08' },
+  ],
+};
+
+// Load Projects
+function loadProjects(containerId, clientView = true) {
   const container = document.getElementById(containerId);
   if (!container) return;
 
-  const user = authService.getUser();
-  let projects = projectsData;
+  const projects = mockData.projects;
 
-  // Filter for clients (show only their project)
-  if (authService.isClient() && user.projectId) {
-    projects = projectsData.filter(p => p.id === user.projectId);
+  if (projects.length === 0) {
+    container.innerHTML = `<p class="text-center text-muted">${t('project_no_files')}</p>`;
+    return;
   }
 
   const html = projects
-    .map(project => `
-      <div class="project-card">
-        <div class="project-image">
-          <img src="project-images/${project.image}" alt="${project.name}" onerror="this.src='https://via.placeholder.com/300x200?text=${project.code}'">
+    .map(
+      (project) => `
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>${project.name}</h3>
+          <p class="text-muted">${project.scope}</p>
         </div>
-        <div class="project-info">
-          <h3>${project.code}</h3>
-          <p><strong>${t('dashboard_project_stage')}:</strong> ${project.stage}</p>
-          <p><strong>${t('dashboard_owner')}:</strong> ${project.owner}</p>
-          <p><strong>${t('common_area')}:</strong> ${project.area}</p>
-          <p>${project.description}</p>
-        </div>
-        <div class="project-footer">
-          <span class="status-badge status-${project.status}">${project.stage}</span>
-          <button class="btn btn-small" onclick="viewProject(${project.id})">${t('dashboard_view_details')}</button>
-        </div>
+        <span class="status status-${project.status}">
+          <span class="status-dot"></span>
+          ${getStatusLabel(project.status)}
+        </span>
       </div>
-    `)
+      <div class="card-body">
+        <p><strong>${t('project_area')}:</strong> ${project.area} m²</p>
+        <p><strong>${t('project_status')}:</strong> ${getStatusLabel(project.status)}</p>
+        <p><strong>Last Update:</strong> ${new Date(project.lastUpdate).toLocaleDateString(currentLanguage === 'ar' ? 'ar-AE' : 'en-US')}</p>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-primary btn-small" onclick="navigateTo('project-detail')">${t('dashboard_view_details')}</button>
+      </div>
+    </div>
+  `
+    )
     .join('');
 
   container.innerHTML = html;
 }
 
-// View Project Details
-function viewProject(projectId) {
-  localStorage.setItem('currentProject', projectId);
-  window.location.href = 'project-detail.html?lang=' + currentLanguage;
+// Load Clients (Admin)
+function loadClients(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  const clients = mockData.clients;
+
+  const html = `
+    <table>
+      <thead>
+        <tr>
+          <th>${t('admin_client_name')}</th>
+          <th>Email</th>
+          <th>Projects</th>
+          <th>Last Active</th>
+          <th>${t('admin_action')}</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${clients
+          .map(
+            (client) => `
+          <tr>
+            <td>${client.name}</td>
+            <td>${client.email}</td>
+            <td>${client.projects}</td>
+            <td>${new Date(client.lastActive).toLocaleDateString(currentLanguage === 'ar' ? 'ar-AE' : 'en-US')}</td>
+            <td>
+              <button class="btn btn-secondary btn-small">${t('admin_view')}</button>
+            </td>
+          </tr>
+        `
+          )
+          .join('')}
+      </tbody>
+    </table>
+  `;
+
+  container.innerHTML = html;
 }
 
-// Get Project by ID
-function getProject(id) {
-  return projectsData.find(p => p.id === parseInt(id));
+// Get Status Label
+function getStatusLabel(status) {
+  const labels = {
+    pending: t('dashboard_active'),
+    'under-review': t('dashboard_under_review'),
+    approved: t('dashboard_approved'),
+    completed: t('dashboard_completed'),
+  };
+  return labels[status] || status;
 }
 
-// Toggle Language
-function toggleLanguage() {
-  const newLang = currentLanguage === 'en' ? 'ar' : 'en';
-  setLanguage(newLang);
+// Quote Calculation (Mock)
+function calculateQuote(area, scope) {
+  const baseRates = {
+    'residential-villa': 800,
+    'residential-apartment': 600,
+    'commercial': 500,
+    'mixed': 700,
+  };
+
+  const rate = baseRates[scope] || 700;
+  const estimate = Math.round(area * rate);
+  const low = Math.round(estimate * 0.85);
+  const high = Math.round(estimate * 1.15);
+
+  return { low, high, estimate };
 }
 
-// Logout User
-function logout() {
-  authService.logout();
-}
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', () => {
+  initLanguage();
+  checkAuth();
 
-// Initialize on Page Load
-document.addEventListener('DOMContentLoaded', initPage);
+  // Setup language buttons
+  document.querySelectorAll('.lang-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      setLanguage(btn.getAttribute('data-lang'));
+      location.reload();
+    });
+  });
+
+  // Setup navigation
+  document.querySelectorAll('[data-navigate]').forEach((el) => {
+    el.addEventListener('click', () => {
+      navigateTo(el.getAttribute('data-navigate'));
+    });
+  });
+
+  // Logout button
+  document.getElementById('logout-btn')?.addEventListener('click', () => {
+    authService.logout();
+  });
+
+  // Setup form handlers
+  const loginForm = document.getElementById('login-form');
+  if (loginForm) {
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      const user = authService.login(email, password);
+      if (user.role === 'admin') {
+        window.location.href = 'dashboard-admin.html';
+      } else {
+        window.location.href = 'dashboard-client.html';
+      }
+    });
+  }
+
+  const quotationForm = document.getElementById('quotation-form');
+  if (quotationForm) {
+    quotationForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const area = parseFloat(document.getElementById('quotation-area').value);
+      const scope = document.getElementById('quotation-scope').value;
+      const quote = calculateQuote(area, scope);
+      const resultEl = document.getElementById('quotation-result');
+      if (resultEl) {
+        resultEl.innerHTML = `
+          <div class="alert alert-success">
+            <div class="alert-icon">✓</div>
+            <div>
+              <strong>${t('quotation_estimate')}</strong><br>
+              ${quote.low.toLocaleString()} - ${quote.high.toLocaleString()} ${t('common_aed')}
+            </div>
+          </div>
+        `;
+      }
+    });
+  }
+});
+
+// Export functions
+window.setLanguage = setLanguage;
+window.t = t;
+window.navigateTo = navigateTo;
+window.openModal = openModal;
+window.closeModal = closeModal;
+window.authService = authService;
+window.loadProjects = loadProjects;
+window.loadClients = loadClients;
+window.calculateQuote = calculateQuote;

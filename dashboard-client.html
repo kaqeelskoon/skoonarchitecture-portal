@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client Dashboard - SKOON Portal</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body id="dashboard-client">
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="logo">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="8" width="12" height="24" fill="#185FA5" rx="2" />
+            <rect x="18" y="2" width="12" height="30" fill="#378ADD" rx="2" />
+            <rect x="34" y="12" width="6" height="20" fill="#639922" rx="1" />
+          </svg>
+          SKOON
+        </a>
+
+        <ul>
+          <li><a href="#" class="nav-link active" data-i18n="nav_projects">Projects</a></li>
+          <li><a href="#" class="nav-link">Support</a></li>
+        </ul>
+
+        <div class="nav-right">
+          <div class="lang-switcher">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="ar">AR</button>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span id="user-name" style="color: #666; font-weight: 500;">Client</span>
+            <button class="btn btn-ghost btn-small" id="logout-btn" data-i18n="nav_logout">Logout</button>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main style="background: #f5f5f5; min-height: calc(100vh - 80px);">
+    <div class="dashboard-wrapper">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-item active" onclick="navigateTo('dashboard-client')">
+          <span class="sidebar-icon"><i class="fas fa-th-large"></i></span>
+          <span data-i18n="admin_dashboard">Dashboard</span>
+        </div>
+        <div class="sidebar-item" onclick="navigateTo('quotation')">
+          <span class="sidebar-icon"><i class="fas fa-file-invoice"></i></span>
+          <span data-i18n="quotation_title">Request Quotation</span>
+        </div>
+        <div class="sidebar-item">
+          <span class="sidebar-icon"><i class="fas fa-cog"></i></span>
+          <span>Settings</span>
+        </div>
+        <div class="sidebar-item">
+          <span class="sidebar-icon"><i class="fas fa-question-circle"></i></span>
+          <span>Help & Support</span>
+        </div>
+      </aside>
+
+      <!-- Dashboard Content -->
+      <div class="dashboard-content">
+        <!-- Welcome Section -->
+        <section style="margin-bottom: 2rem;">
+          <h1 data-i18n="dashboard_welcome">Welcome back</h1>
+          <p style="color: #666; margin-top: 0.5rem;">Here's an overview of your projects and activities</p>
+        </section>
+
+        <!-- Quick Actions -->
+        <div class="grid grid-3" style="margin-bottom: 2rem;">
+          <div class="card" style="text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">3</div>
+            <div style="color: #666;" data-i18n="dashboard_my_projects">My Projects</div>
+          </div>
+          <div class="card" style="text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">1</div>
+            <div style="color: #666;" data-i18n="dashboard_active">Active</div>
+          </div>
+          <div class="card" style="text-align: center; cursor: pointer;" onclick="navigateTo('quotation')">
+            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">+</div>
+            <div style="color: #185FA5; font-weight: 600;" data-i18n="dashboard_new_project">Request Quotation</div>
+          </div>
+        </div>
+
+        <!-- Projects Section -->
+        <section>
+          <h2 style="margin-bottom: 1.5rem;" data-i18n="dashboard_my_projects">My Projects</h2>
+          <div id="projects-container" class="grid grid-2">
+            <!-- Projects will be loaded here -->
+          </div>
+        </section>
+
+        <!-- Recent Activity -->
+        <section style="margin-top: 2rem;">
+          <h2 style="margin-bottom: 1.5rem;">Recent Activity</h2>
+          <div class="card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Project</th>
+                  <th>Activity</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Villa Al-Amali</td>
+                  <td>Files uploaded</td>
+                  <td>Oct 14, 2024</td>
+                  <td><span class="badge badge-warning">In Review</span></td>
+                </tr>
+                <tr>
+                  <td>Commercial Project</td>
+                  <td>Status updated</td>
+                  <td>Oct 13, 2024</td>
+                  <td><span class="badge badge-success">Approved</span></td>
+                </tr>
+                <tr>
+                  <td>Residential Complex</td>
+                  <td>Quote received</td>
+                  <td>Oct 8, 2024</td>
+                  <td><span class="badge badge-primary">Pending Review</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer style="margin-top: 3rem;">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3>SKOON</h3>
+          <p>Architecture & Engineering Consultants</p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#">My Projects</a></li>
+            <li><a href="#">Support</a></li>
+            <li><a href="#">Documentation</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <ul>
+            <li><a href="mailto:info@skoon.ae">info@skoon.ae</a></li>
+            <li><a href="tel:+97144xxx">+971 4 XXX XXXX</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 SKOON Architecture. <span data-i18n="footer_rights">All rights reserved</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    // Load projects on page load
+    window.addEventListener('load', () => {
+      loadProjects('projects-container', true);
+    });
+  </script>
+</body>
+</html>
