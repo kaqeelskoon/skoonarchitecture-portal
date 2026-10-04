@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKOON - Project Details</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .detail-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .breadcrumb {
+      margin-bottom: 2rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-back {
+      padding: 0.6rem 1.2rem;
+      background: var(--bg-card);
+      color: var(--primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-back:hover {
+      background: var(--border);
+    }
+
+    .lang-toggle {
+      background: var(--primary);
+      color: #000;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .lang-toggle:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-logout {
+      padding: 0.6rem 1.2rem;
+      background: var(--danger);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-logout:hover {
+      background: #c73939;
+    }
+
+    .project-hero {
+      width: 100%;
+      height: 450px;
+      background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-lighter) 100%);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 2rem;
+      position: relative;
+      border: 1px solid var(--border);
+    }
+
+    .project-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .project-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(212, 165, 116, 0.1) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .project-code-badge {
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+      background: var(--primary);
+      color: #000;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius);
+      font-weight: 700;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    html[lang="ar"] .project-code-badge {
+      left: auto;
+      right: 2rem;
+    }
+
+    .project-header {
+      margin-bottom: 2rem;
+    }
+
+    .project-header h1 {
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      font-size: 2.5rem;
+    }
+
+    .project-header .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .info-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      border-radius: var(--radius-lg);
+      border-left: 4px solid var(--primary);
+    }
+
+    html[lang="ar"] .info-card {
+      border-left: none;
+      border-right: 4px solid var(--primary);
+    }
+
+    .info-label {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .info-value {
+      color: var(--text-primary);
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .section h2 {
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 1rem;
+    }
+
+    .description-text {
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .document-list {
+      list-style: none;
+    }
+
+    .document-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+      background: var(--bg-light);
+      border-radius: var(--radius);
+      margin-bottom: 0.75rem;
+      transition: var(--transition);
+    }
+
+    .document-item:hover {
+      background: var(--border);
+    }
+
+    .document-icon {
+      font-size: 1.5rem;
+      margin-right: 1rem;
+    }
+
+    html[lang="ar"] .document-icon {
+      margin-right: 0;
+      margin-left: 1rem;
+    }
+
+    .document-info {
+      flex: 1;
+    }
+
+    .document-name {
+      color: var(--text-primary);
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .document-status {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .document-status.pending {
+      color: #ffa500;
+    }
+
+    .document-status.ready {
+      color: #7acc2d;
+    }
+
+    .document-status.available {
+      color: #7acc2d;
+    }
+
+    .btn-document {
+      padding: 0.5rem 1rem;
+      background: var(--primary);
+      color: #000;
+      border: none;
+      border-radius: var(--radius);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 0.85rem;
+    }
+
+    .btn-document:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-document.disabled {
+      background: var(--text-muted);
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    .status-section {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.5rem;
+      background: var(--bg-light);
+      border-radius: var(--radius);
+      margin-bottom: 1rem;
+    }
+
+    .status-badge-large {
+      padding: 0.75rem 1.5rem;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .status-construction {
+      background: rgba(99, 153, 34, 0.2);
+      color: #7acc2d;
+    }
+
+    .status-tender {
+      background: rgba(186, 117, 23, 0.2);
+      color: #ffa500;
+    }
+
+    .status-contract {
+      background: rgba(212, 165, 116, 0.2);
+      color: var(--primary);
+    }
+
+    .tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tab {
+      padding: 1rem 1.5rem;
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      border-bottom: 3px solid transparent;
+    }
+
+    .tab.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    .tab:hover {
+      color: var(--text-primary);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .detail-container {
+        padding: 1rem;
+      }
+
+      .project-hero {
+        height: 250px;
+      }
+
+      .project-header h1 {
+        font-size: 1.5rem;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .top-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .tabs {
+        flex-wrap: wrap;
+      }
+
+      .tab {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body id="project-detail">
+  <div class="detail-container">
+    <!-- Top Navigation -->
+    <div class="top-bar">
+      <a href="#" class="btn-back" onclick="history.back(); return false;" data-i18n="common_back">← Back</a>
+      
+      <div style="display: flex; gap: 1rem;">
+        <button class="lang-toggle" onclick="toggleLanguage()" data-i18n="common_language">العربية</button>
+        <button class="btn-logout" onclick="logout()" data-i18n="common_logout">Logout</button>
+      </div>
+    </div>
+
+    <!-- Project Hero Image -->
+    <div class="project-hero">
+      <span class="project-code-badge" id="project-code-hero">SD-P###</span>
+      <img id="project-hero-img" src="" alt="Project Hero" 
+           onerror="this.src='https://via.placeholder.com/1200x450?text=Project+Image'">
+    </div>
+
+    <!-- Project Header -->
+    <div class="project-header">
+      <h1 id="project-title">Project Name</h1>
+      <p class="subtitle" id="project-subtitle">Project Details & Documentation</p>
+    </div>
+
+    <!-- Info Cards Grid -->
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-label" data-i18n="dashboard_owner">Owner</div>
+        <div class="info-value" id="info-owner">-</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label" data-i18n="common_area">Area</div>
+        <div class="info-value" id="info-area">-</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label" data-i18n="common_location">Location</div>
+        <div class="info-value" id="info-location">-</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label" data-i18n="dashboard_project_stage">Stage</div>
+        <div class="info-value" id="info-stage">-</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label" data-i18n="common_scope">Scope</div>
+        <div class="info-value" id="info-type">-</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label" data-i18n="common_status">Status</div>
+        <div style="margin-top: 0.5rem;">
+          <span class="status-badge-large status-construction" id="info-status">-</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status Section -->
+    <div class="status-section">
+      <span data-i18n="common_status" style="font-weight: 600;">Project Status:</span>
+      <span class="status-badge-large status-construction" id="status-main">Under Construction</span>
+    </div>
+
+    <!-- Tabs Section -->
+    <div class="section">
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab(event, 'overview')" data-i18n="project_overview">Overview</button>
+        <button class="tab" onclick="switchTab(event, 'documents')" data-i18n="project_files">Documents</button>
+        <button class="tab" onclick="switchTab(event, 'timeline')" data-i18n="project_timeline">Timeline</button>
+      </div>
+
+      <!-- Overview Tab -->
+      <div id="overview" class="tab-content active">
+        <h3 style="color: var(--text-primary); margin-bottom: 1rem;" data-i18n="project_description">Description</h3>
+        <p class="description-text" id="overview-text">Project description goes here...</p>
+
+        <h3 style="color: var(--text-primary); margin-bottom: 1rem; margin-top: 1.5rem;" data-i18n="project_scope">Scope of Work</h3>
+        <p class="description-text">This project includes comprehensive architectural design, structural engineering, MEP systems design, tender documentation, and supervision services.</p>
+      </div>
+
+      <!-- Documents Tab -->
+      <div id="documents" class="tab-content">
+        <h3 style="color: var(--text-primary); margin-bottom: 1.5rem;" data-i18n="project_documents">Project Documents</h3>
+        <div id="documents-container"></div>
+      </div>
+
+      <!-- Timeline Tab -->
+      <div id="timeline" class="tab-content">
+        <h3 style="color: var(--text-primary); margin-bottom: 1.5rem;" data-i18n="project_timeline">Project Timeline</h3>
+        
+        <div style="position: relative; padding: 1rem 0;">
+          <div style="display: flex; margin-bottom: 2rem;">
+            <div style="flex: 0 0 40px; text-align: center;">
+              <div style="width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; font-weight: 700;">1</div>
+            </div>
+            <div style="flex: 1; padding-left: 1.5rem;">
+              <h4 style="color: var(--text-primary); margin-bottom: 0.25rem;">Design Phase</h4>
+              <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">Initial architectural design and planning</p>
+            </div>
+          </div>
+
+          <div style="display: flex; margin-bottom: 2rem;">
+            <div style="flex: 0 0 40px; text-align: center;">
+              <div style="width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; font-weight: 700;">2</div>
+            </div>
+            <div style="flex: 1; padding-left: 1.5rem;">
+              <h4 style="color: var(--text-primary); margin-bottom: 0.25rem;">Tender Documentation</h4>
+              <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">Prepare BOQ, specifications and tender documents</p>
+            </div>
+          </div>
+
+          <div style="display: flex; margin-bottom: 2rem;">
+            <div style="flex: 0 0 40px; text-align: center;">
+              <div style="width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; font-weight: 700;">3</div>
+            </div>
+            <div style="flex: 1; padding-left: 1.5rem;">
+              <h4 style="color: var(--text-primary); margin-bottom: 0.25rem;">Contractor Selection</h4>
+              <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">Evaluate bids and select contractor</p>
+            </div>
+          </div>
+
+          <div style="display: flex;">
+            <div style="flex: 0 0 40px; text-align: center;">
+              <div style="width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; font-weight: 700;">4</div>
+            </div>
+            <div style="flex: 1; padding-left: 1.5rem;">
+              <h4 style="color: var(--text-primary); margin-bottom: 0.25rem;">Construction & Supervision</h4>
+              <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">On-site supervision and project management</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="section">
+      <h2 data-i18n="dashboard_contact">Contact Information</h2>
+      <p class="description-text">
+        For questions or support regarding this project, please contact the SKOON Architecture & Engineering team.
+      </p>
+      <p>
+        <strong>Email:</strong> <a href="mailto:info@skoon.ae" style="color: var(--primary);">info@skoon.ae</a><br>
+        <strong>Phone:</strong> +971 4 XXX XXXX<br>
+        <strong>Location:</strong> Dubai, UAE
+      </p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    // Initialize
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    if (langParam) currentLanguage = langParam;
+    setLanguage(currentLanguage);
+
+    // Get project ID from localStorage
+    const projectId = localStorage.getItem('currentProject');
+    const project = getProject(projectId);
+
+    if (!project) {
+      alert('Project not found');
+      window.location.href = 'dashboard-employee.html';
+    }
+
+    // Populate page with project data
+    document.getElementById('project-code-hero').textContent = project.code;
+    document.getElementById('project-title').textContent = project.name;
+    document.getElementById('project-subtitle').textContent = `${project.stage} • ${project.location}`;
+    
+    document.getElementById('info-owner').textContent = project.owner;
+    document.getElementById('info-area').textContent = project.area;
+    document.getElementById('info-location').textContent = project.location;
+    document.getElementById('info-stage').textContent = project.stage;
+    document.getElementById('info-type').textContent = project.type;
+    document.getElementById('info-status').textContent = project.stage;
+    document.getElementById('info-status').className = `status-badge-large status-${project.status}`;
+    
+    document.getElementById('status-main').textContent = project.stage;
+    document.getElementById('status-main').className = `status-badge-large status-${project.status}`;
+    
+    document.getElementById('overview-text').textContent = project.description;
+    
+    // Set project hero image
+    document.getElementById('project-hero-img').src = `project-images/${project.image}`;
+
+    // Tab switching
+    function switchTab(e, tabName) {
+      e.preventDefault();
+      
+      // Hide all tabs
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      
+      // Remove active from all buttons
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      
+      // Show selected tab and button
+      document.getElementById(tabName).classList.add('active');
+      e.target.classList.add('active');
+    }
+
+    // Load and display documents dynamically
+    function loadDocuments(project) {
+      const container = document.getElementById('documents-container');
+      if (!project.documents) {
+        container.innerHTML = '<p style="color: var(--text-secondary);">No documents available yet.</p>';
+        return;
+      }
+
+      const sections = [
+        { key: 'drawings', label: '📐 Drawings', icon: '🖼️' },
+        { key: 'specifications', label: '📋 Specifications & Bill of Quantities', icon: '📄' },
+        { key: 'tender', label: '📑 Tender & Contracts', icon: '📝' },
+        { key: 'reports', label: '📈 Reports & Analysis', icon: '💰' }
+      ];
+
+      let html = '';
+
+      sections.forEach(section => {
+        if (project.documents[section.key] && project.documents[section.key].length > 0) {
+          html += `<h4 style="color: var(--text-primary); font-size: 1.1rem; margin: 1.5rem 0 1rem 0;">${section.label}</h4>`;
+          html += '<ul class="document-list">';
+          
+          project.documents[section.key].forEach(docName => {
+            const docPath = `documents/${project.code}/${section.key}/${docName}`;
+            html += `
+              <li class="document-item">
+                <div style="display: flex; align-items: center;">
+                  <span class="document-icon">${section.icon}</span>
+                  <div class="document-info">
+                    <div class="document-name">${docName}</div>
+                    <div class="document-status available">Available</div>
+                  </div>
+                </div>
+                <button class="btn-document" onclick="downloadDocument('${docPath}', '${docName}')">Download</button>
+              </li>
+            `;
+          });
+          
+          html += '</ul>';
+        }
+      });
+
+      container.innerHTML = html;
+    }
+
+    // Download function
+    function downloadDocument(path, name) {
+      // In production, this would fetch the actual file
+      // For now, show a message or redirect to the file location
+      const link = document.createElement('a');
+      link.href = path;
+      link.download = name;
+      link.style.display = 'none';
+      document.body.appendChild(link);
+      
+      // Try to download, if it fails, open in new tab
+      link.click();
+      
+      setTimeout(() => {
+        document.body.removeChild(link);
+      }, 100);
+    }
+
+    // Load documents for current project
+    loadDocuments(project);
+
+    // Add missing translation
+    translations.en.project_overview = 'Overview';
+    translations.en.project_documents = 'Project Documents';
+    translations.en.project_timeline = 'Timeline';
+    translations.en.project_description = 'Description';
+    translations.en.project_scope = 'Scope of Work';
+    translations.en.common_back = 'Back';
+    
+    translations.ar.project_overview = 'نظرة عامة';
+    translations.ar.project_documents = 'المستندات';
+    translations.ar.project_timeline = 'المخطط الزمني';
+    translations.ar.project_description = 'الوصف';
+    translations.ar.project_scope = 'نطاق العمل';
+    translations.ar.common_back = 'رجوع';
+  </script>
+</body>
+</html>
